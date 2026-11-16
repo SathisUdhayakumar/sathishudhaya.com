@@ -356,8 +356,8 @@ ul{padding:0;list-style:none}
   .strip > div + div{border-top:1px solid var(--line)}
   .strip .yr{grid-row:span 3;padding-top:2px}
   .strip b{margin-top:0}
-  .post{grid-template-columns:minmax(0,1fr)}
-  .post span{grid-column:1;grid-row:auto}
+  .post{gap:4px 12px}
+  .post p{grid-column:1/-1;font-size:14px;line-height:1.5}
   .ftr{margin-top:72px}
   .cl{padding-top:40px}
   .cl h2{font-size:24px}
@@ -587,4 +587,21 @@ ul{padding:0;list-style:none}
   .gc-claim{font-size:19px}
   .gc-num{font-size:20px}
   .gc-ph{display:none}
+}
+
+/* Experience as rows, same anatomy as Writing (option H) */
+.shm{font-size:14.5px;color:var(--muted);white-space:nowrap}
+.xl{border-top:1px solid var(--line);margin-top:20px;padding:0;list-style:none}
+.xr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 0;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.xr b{font-weight:500;font-size:16.5px}
+.xr .xrole{padding-left:10px;color:var(--muted);font-size:14.5px}
+.xr .yr{padding-left:24px;font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.xr p{grid-column:1/3;color:var(--muted);font-size:14.5px}
+@media (max-width:640px){
+  .xr{grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
+  .xr b{grid-column:1;grid-row:1}
+  .xr .yr{grid-column:2;grid-row:1;padding-left:0}
+  .xr .xrole{grid-column:1/-1;padding-left:0;color:var(--fg)}
+  .xr p{grid-column:1/-1;font-size:14px;line-height:1.5}
+  .shm{font-size:14px}
 }
