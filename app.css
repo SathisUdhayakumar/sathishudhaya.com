@@ -10,10 +10,10 @@
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0e0e0d; --fg:#f2f2ef; --muted:#a8a8a3; --faint:#7c7c78; --line:#272725; --soft:#181817; --soft2:#22221f;
+  --bg:#0e0e0d; --fg:#f2f2ef; --muted:#a8a8a3; --faint:#7c7c78; --line:#272725; --soft:#1d1d1b; --soft2:#272724; --ring:inset 0 0 0 1px rgba(255,255,255,.07);
   --accent:#8eb0ff; --ok:#4ade80; --flag:#fbbf24; --flagbg:#3a2a07; --shadow:0 10px 30px -14px rgba(0,0,0,.8); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0e0e0d; --fg:#f2f2ef; --muted:#a8a8a3; --faint:#7c7c78; --line:#272725; --soft:#181817; --soft2:#22221f;
+  --bg:#0e0e0d; --fg:#f2f2ef; --muted:#a8a8a3; --faint:#7c7c78; --line:#272725; --soft:#1d1d1b; --soft2:#272724; --ring:inset 0 0 0 1px rgba(255,255,255,.07);
   --accent:#8eb0ff; --ok:#4ade80; --flag:#fbbf24; --flagbg:#3a2a07; --shadow:0 10px 30px -14px rgba(0,0,0,.8); color-scheme:dark}
 
 *,*::before,*::after{box-sizing:border-box}
@@ -614,3 +614,7 @@ ul{padding:0;list-style:none}
   .rglance b{font-size:22px}
   .rglance span{margin-top:0;font-size:14px}
 }
+
+/* Dark mode: screenshot frames get a faint edge so they read against the page */
+:root{--ring:none}
+.shot,.cover,.fig button,.gc-shot,.sc-shot{box-shadow:var(--ring)}
