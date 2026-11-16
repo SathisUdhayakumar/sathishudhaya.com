@@ -618,3 +618,6 @@ ul{padding:0;list-style:none}
 /* Dark mode: screenshot frames get a faint edge so they read against the page */
 :root{--ring:none}
 .shot,.cover,.fig button,.gc-shot,.sc-shot{box-shadow:var(--ring)}
+
+/* Footer: copyright and the one link sit on one line on wider screens */
+@media (min-width:641px){.fb{align-items:center}}
