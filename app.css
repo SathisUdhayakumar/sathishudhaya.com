@@ -556,3 +556,35 @@ ul{padding:0;list-style:none}
   .rsec > p{font-size:9.5pt;margin-top:8pt!important}
 }
 @media print{.rsec:has(.kv){break-inside:avoid}}
+
+/* ================= Selected case studies: option B, balanced 2x2 grid ================= */
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px;row-gap:0}
+.gc{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0;margin-bottom:40px;border-radius:16px}
+.gc-shot{--x:0;display:block;position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--soft);border-radius:14px;transition:background-color .2s}
+.gc-shot img{position:absolute;top:20px;left:calc(20px - var(--x) * 40%);width:115%;max-width:none;height:auto;border-radius:7px;box-shadow:0 10px 24px -14px rgba(0,0,0,.32)}
+.gc-kick{margin-top:16px}
+.gc-claim{display:block;margin-top:4px;margin-bottom:14px;font-size:21px;line-height:1.25;font-weight:500;letter-spacing:-.02em;text-wrap:balance}
+.gc-res{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:baseline;align-self:start;padding-top:14px;border-top:1px solid var(--line)}
+/* metric numbers have their own class, so they never pick up the case-study figure margin */
+.gc-num{display:block;margin:0;font-size:24px;font-weight:500;letter-spacing:-.025em;font-variant-numeric:tabular-nums;line-height:1;white-space:nowrap}
+.gc-lab{font-size:14.5px;line-height:1.4}
+.gc .arr{color:var(--muted);transition:color .15s}
+.gc:hover .gc-shot{background:var(--soft2)}
+.gc:hover .gc-claim,.gc:focus-visible .gc-claim{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px}
+.gc:hover .arr,.gc:focus-visible .arr{color:var(--fg)}
+.gc:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:16px}
+@media (max-width:1100px){
+  .g2{column-gap:20px}
+  .gc{margin-bottom:32px}
+  .gc-claim{font-size:18px}
+  .gc-num{font-size:21px}
+  .gc-lab{font-size:13.5px}
+}
+@media (max-width:640px){
+  .g2{grid-template-columns:minmax(0,1fr)}
+  .gc-shot{border-radius:12px}
+  .gc-shot img{top:12px;left:calc(12px - var(--x) * 40%);width:118%}
+  .gc-claim{font-size:19px}
+  .gc-num{font-size:20px}
+  .gc-ph{display:none}
+}
