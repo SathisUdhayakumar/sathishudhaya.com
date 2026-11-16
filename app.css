@@ -605,3 +605,12 @@ ul{padding:0;list-style:none}
   .xr p{grid-column:1/-1;font-size:14px;line-height:1.5}
   .shm{font-size:14px}
 }
+
+/* Resume "At a glance": one row per number on phones */
+@media (max-width:640px){
+  .rglance{grid-template-columns:minmax(0,1fr);gap:0;margin-top:0}
+  .rglance > div:first-child{padding-top:14px}
+  .rglance > div{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line)}
+  .rglance b{font-size:22px}
+  .rglance span{margin-top:0;font-size:14px}
+}
