@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Progress Report case study · Sathish Udhayakumar</title>
+<meta name="description" content="A heuristic review found six problems in Powerplay’s daily site report. I designed a fix for each one in 15 days.">
+<link rel="canonical" href="https://sathishudhaya.com/dpr/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sathishudhaya.com/dpr/">
+<meta property="og:title" content="Daily Progress Report case study · Sathish Udhayakumar">
+<meta property="og:description" content="A heuristic review found six problems in Powerplay’s daily site report. I designed a fix for each one in 15 days.">
+<meta property="og:image" content="https://sathishudhaya.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+/* Same system as Home (G) and Work (F)
+   Column 720 · spacing 8 16 24 32 48 72 120 · type 13 14 16 20 32 56
+   Text #0a0a0a / #5c5c5c · lines #e5e5e5 / #d4d4d4 · surfaces #f5f5f5 / #fafafa · blue #3e6dec for hover, focus, current */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:#fff;color:#0a0a0a;font:400 16px/1.6 'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,ol,figure,dl,dd,blockquote{margin:0;padding:0}
+ul,ol{list-style:none}
+a{color:#0a0a0a}
+a:hover{color:#3e6dec}
+a:focus-visible,button:focus-visible{outline:2px solid #3e6dec;outline-offset:2px;border-radius:2px}
+b,strong{font-weight:600}
+img{display:block;max-width:100%;height:auto}
+
+.col{max-width:768px;margin:0 auto;padding:0 24px}
+.wide{width:min(960px,100vw - 48px);position:relative;left:50%;transform:translateX(-50%)}
+
+/* menu */
+.nav{display:flex;justify-content:center;gap:24px;padding-top:24px;font-size:14px}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 2px;text-decoration:none;color:#5c5c5c}
+.nav a:hover{color:#3e6dec}
+.nav a[aria-current]{color:#0a0a0a;text-decoration:underline wavy #3e6dec 1px;text-underline-offset:6px}
+
+/* type */
+.label{font-size:14px;line-height:1.4;color:#5c5c5c}
+h1{font:600 clamp(40px,7vw,56px)/1.08 'Bricolage Grotesque',sans-serif;letter-spacing:-1.4px}
+h2{font:600 32px/1.2 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
+h3{font:600 20px/1.3 'Bricolage Grotesque',sans-serif;letter-spacing:-.2px}
+.lead{font-size:20px;line-height:1.5;color:#5c5c5c;max-width:640px}
+.body{max-width:640px}
+.body+.body{margin-top:16px}
+.note{font-size:13px;line-height:1.5;color:#5c5c5c}
+.muted{color:#5c5c5c}
+
+/* rhythm */
+header{padding-top:120px}
+header h1{margin-top:16px}
+header .lead{margin-top:32px}
+section{padding-top:120px}
+section>h2{margin-top:16px}
+section>h2+.body,section>h2+.lead{margin-top:16px}
+.blk{margin-top:72px}
+.blk>h3+.body{margin-top:16px}
+.blk>.label+h3{margin-top:8px}
+figure{margin-top:32px}
+figcaption{margin-top:16px;font-size:13px;line-height:1.5;color:#5c5c5c;max-width:640px}
+
+.wide>figcaption{margin-left:max(0px,(100% - 720px)/2)}
+
+/* results: number + what it measures */
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;margin-top:48px}
+.res>div{padding:24px 24px 24px 0}
+.res>div+div{padding-left:24px;border-left:1px solid #e5e5e5}
+.res .n{font:600 32px/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
+.res .l{margin-top:8px;font-size:14px;line-height:1.5;color:#5c5c5c}
+
+/* rows, like Experience on Home */
+.rows{border-bottom:1px solid #e5e5e5}
+.rows>div{display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px solid #e5e5e5;font-size:14px;line-height:1.5}
+.rows dt,.rows .k{color:#5c5c5c}
+.rows.tri>div{grid-template-columns:160px minmax(0,1fr) minmax(0,1fr)}
+.rows .hd{color:#5c5c5c;padding:8px 0}
+.facts{margin-top:48px}
+.facts+.note{margin-top:16px}
+
+/* screens */
+.shot{padding:0}
+.shot img{aspect-ratio:16/10;object-fit:cover;object-position:left top}
+.fitbox{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;border:1px solid #e5e5e5;border-radius:12px;background:#fafafa;box-shadow:0 8px 24px rgba(10,10,10,.06);padding:24px}
+.shot .fitbox img{aspect-ratio:auto;width:auto;height:100%;max-width:100%;border:0;box-shadow:none;background:none}
+.shot img{border-radius:12px;border:1px solid #e5e5e5;width:100%;background:#fff;box-shadow:0 8px 24px rgba(10,10,10,.06)}
+
+.shot.free img{aspect-ratio:auto;object-fit:initial}
+.next .s{margin-left:8px;font-size:16px;color:#5c5c5c}
+@media (max-width:600px){.next .s{display:block;margin:4px 0 0}}
+/* quote, like Kind words */
+blockquote{margin-top:32px;border-left:0;font-size:20px;line-height:1.5;max-width:640px}
+blockquote+p{margin-top:8px}
+
+/* prototype */
+.px{border:1px solid #e5e5e5;border-radius:24px;overflow:hidden;background:#f5f5f5}
+.px-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px 12px 24px;font-size:14px;color:#5c5c5c;border-bottom:1px solid #e5e5e5;background:#fafafa}
+.px-bar a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#0a0a0a;text-decoration:none}
+.px-bar a:hover{color:#3e6dec}
+.px-bar button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid #e5e5e5;border-radius:999px;background:#fff;color:#0a0a0a;font:500 14px/1 'DM Sans',sans-serif;cursor:pointer}
+.px-bar button:hover{color:#3e6dec;border-color:#3e6dec}
+.px-key{font-size:12px;color:#5c5c5c;border:1px solid #e5e5e5;border-radius:4px;padding:2px 6px}
+.px-fs-close{display:none;align-items:center;gap:8px}
+.px-fig.is-full{transform:none;left:0;width:auto}
+.px-fig.is-full .px{position:fixed;inset:0;z-index:100;border:0;border-radius:0;display:flex;flex-direction:column}
+.px-fig.is-full .px-stage{aspect-ratio:auto;flex:1}
+.px-fig.is-full .px-stage iframe{display:block}
+.px-fig.is-full .px-poster{display:none}
+.px-fig.is-full .px-fs-open{display:none}
+.px-fig.is-full .px-fs-close{display:inline-flex}
+html.px-lock{overflow:hidden}
+.px-stage{position:relative;aspect-ratio:1440/900;background:#fff}
+.px-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.px-poster{display:none}
+@media (max-width:760px){
+  .px-stage iframe{display:none}
+  .px-poster{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left top}
+}
+
+/* flag reasons */
+.flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:24px}
+.flags li{font-size:14px;line-height:1.5;color:#5c5c5c}
+.flags b{display:block;color:#0a0a0a;font-weight:500}
+
+/* next + footer */
+.next{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:24px 0;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;text-decoration:none;color:#0a0a0a}
+.next .t{font:600 20px/1.3 'Bricolage Grotesque',sans-serif}
+.next:hover .t,.next:hover .a{color:#3e6dec}
+.next .a{font-size:14px;color:#5c5c5c;white-space:nowrap}
+footer{margin-top:48px;padding-bottom:72px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:#5c5c5c}
+footer a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#5c5c5c;text-decoration:none}
+footer a:hover{color:#3e6dec}
+
+@media (max-width:600px){
+  header{padding-top:72px}
+  section{padding-top:72px}
+  .blk{margin-top:48px}
+  h2{font-size:24px;letter-spacing:-.3px}
+  .res>div,.res>div+div{padding:16px 0;border-left:0}
+  .res>div+div{border-top:1px solid #e5e5e5}
+  .rows>div,.rows.tri>div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .rows .hd{display:none!important}
+  .shot img,.fitbox{border-radius:8px}
+  .fitbox{padding:8px}
+  .px{border-radius:16px}
+}
+
+/* two pictures side by side */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.two figcaption{margin-top:8px}
+.two figure{margin-top:0}
+.two img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;border-radius:12px;border:1px solid #e5e5e5}
+/* project links with a picture */
+.deep{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+.deep a{display:block;text-decoration:none;color:#0a0a0a}
+.deep img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:left top;border-radius:12px;border:1px solid #e5e5e5;box-shadow:0 8px 24px rgba(10,10,10,.06)}
+.deep .t{display:block;margin-top:16px;font:600 20px/1.3 'Bricolage Grotesque',sans-serif}
+.deep .s{display:block;margin-top:4px;font-size:14px;color:#5c5c5c}
+.deep a:hover .t{color:#3e6dec}
+@media (max-width:600px){.two,.deep{grid-template-columns:1fr}.two img,.deep img{border-radius:8px}}
+</style>
+<script>(function(){try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}if(location.hash)return;var t=0,u=false;function top(){if(!u)scrollTo(0,0)}["wheel","touchstart","keydown","mousedown"].forEach(function(n){addEventListener(n,function(){u=true},{passive:true,once:true})});top();addEventListener("DOMContentLoaded",top);addEventListener("load",function(){top();setTimeout(top,150);setTimeout(top,600);setTimeout(top,1200)});addEventListener("pageshow",function(e){if(e.persisted){u=false;top()}})})();</script>
+</head>
+<body>
+<div class="col" id="top">
+
+<nav class="nav" aria-label="Main">
+<a href="/">Home</a>
+<a href="/work/" aria-current="page">Work</a>
+<a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)">Resume</a>
+</nav>
+
+<main>
+<header>
+<p class="label"><span style="color:#0a0a0a">Powerplay</span> · Report redesign · 15 days</p>
+<h1>Daily Progress Report: a site report people can read</h1>
+<p class="lead">A heuristic review found six problems in the daily site report. I designed a fix for each one in 15 days.</p>
+
+<div class="res" role="list" aria-label="Results">
+<div role="listitem"><p class="n">6 → 6</p><p class="l">problems found, problems fixed</p></div>
+<div role="listitem"><p class="n">15 days</p><p class="l">from audit to final design</p></div>
+<div role="listitem"><p class="n">10</p><p class="l">usability heuristics used for the audit</p></div>
+</div>
+
+<dl class="rows facts">
+<div><dt>Role</dt><dd>Research, analysis, usability testing, product design</dd></div>
+<div><dt>Team</dt><dd>1 designer, 1 PM, 2 engineers</dd></div>
+<div><dt>Timeline</dt><dd>15 days</dd></div>
+<div><dt>Method</dt><dd>Heuristic evaluation</dd></div>
+</dl>
+<p class="note">Screens are recreated from my designs with made-up data.</p>
+</header>
+
+<figure class="wide">
+<div class="shot free"><img src="img/dpr-after.webp" alt="Recreated daily progress report after the redesign: consistent headers, full task names and photos tied to their task." loading="lazy"></div>
+<figcaption>After: full task names, one header style, photos tied to their task.</figcaption>
+</figure>
+
+<section aria-labelledby="s1">
+<p class="label">The problem</p>
+<h2 id="s1">The data was there, but hard to read</h2>
+<p class="body">The Daily Progress Report records a site’s day: tasks done, attendance, materials, site conditions and issues. Project managers use it to follow progress and act early on delays.</p>
+<p class="body">But headers didn’t match, images broke, long task names were cut off, and the layout fell out of line. <b>The report felt like loose pieces.</b></p>
+<figure class="wide">
+<div class="shot free"><img src="img/dpr-before.webp" alt="The report before the redesign." loading="lazy"></div>
+<figcaption>Before.</figcaption>
+</figure>
+</section>
+
+<section aria-labelledby="s2">
+<p class="label">Audit</p>
+<h2 id="s2">Checked against 10 usability heuristics</h2>
+<p class="body">I reviewed the report screen by screen against ten well-known usability principles, marked each problem on the live report, then tried four layouts.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/dpr-heuristics.webp" alt="The ten principles used to review the report." loading="lazy"></div>
+</figure>
+<div class="two wide" style="margin-top:32px"><figure><img src="img/dpr-issues.webp" alt="Problems marked on the report." loading="lazy"><figcaption>Problems marked on the report.</figcaption></figure><figure><img src="img/dpr-layouts.webp" alt="Four layouts, then task counts and headers." loading="lazy"><figcaption>Four layouts, then task counts and headers.</figcaption></figure></div>
+</section>
+
+<section aria-labelledby="s3">
+<p class="label">Fixes</p>
+<h2 id="s3">One fix for each problem</h2>
+<dl class="rows" style="margin-top:32px">
+<div><dt>Hard to scan</dt><dd>Clear layout and hierarchy</dd></div>
+<div><dt>Mixed headers</dt><dd>One header style across the report</dd></div>
+<div><dt>Broken photos</dt><dd>Better media handling, each photo tied to its task</dd></div>
+<div><dt>Cut-off names</dt><dd>Wrapping and tooltips, so <b>full task names</b> show</dd></div>
+<div><dt>Layout breaks</dt><dd>A stronger grid</dd></div>
+<div><dt>Misaligned</dt><dd>Standard alignment and white space, for a calmer report</dd></div>
+</dl>
+</section>
+
+<section aria-labelledby="s4">
+<p class="label">Final design</p>
+<h2 id="s4">Readable at a glance</h2>
+<p class="body">Full task names, consistent headers and photos tied to their task. <b>A reviewer can read the day in one pass.</b></p>
+<figure class="wide">
+<div class="shot free"><img src="img/dpr-final.webp" alt="Final screens: tasks, attendance, payables and materials." loading="lazy"></div>
+<figcaption>Tasks, attendance, payables and materials.</figcaption>
+</figure>
+</section>
+
+<section aria-label="Next case study" style="padding-top:120px">
+<a class="next" href="/autolog/"><span><span class="label" style="display:block">Next case study</span><span class="t">AutoLog</span><span class="s">Krane · AI tool</span></span><span class="a" aria-hidden="true">→</span></a>
+</section>
+</main>
+
+<footer>
+<span>© 2026 Sathish Udhayakumar</span>
+<a href="#top">Back to top <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></a>
+</footer>
+</div>
+</body>
+</html>
