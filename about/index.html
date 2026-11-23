@@ -30,7 +30,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #3e6dec;outline-offset:2p
 b{font-weight:600}
 .col{max-width:768px;margin:0 auto;padding:0 24px}
 
-.nav{display:flex;justify-content:center;gap:24px;padding-top:24px;font-size:14px}
+.nav{display:flex;justify-content:flex-start;gap:24px;padding-top:24px;font-size:14px;width:min(960px,100vw - 48px);margin-left:calc(50% - min(480px,50vw - 24px))}
 .nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 2px;text-decoration:none;color:#5c5c5c}
 .nav a:hover{color:#3e6dec}
 .nav a[aria-current]{color:#0a0a0a;text-decoration:underline wavy #3e6dec 1px;text-underline-offset:6px}
@@ -96,7 +96,7 @@ footer a:hover{color:#3e6dec}
   .bel{grid-template-columns:1fr;gap:24px}
   .nextline{margin-top:56px;font-size:24px;letter-spacing:-.3px}
 }
-</style>
+nav[aria-label=Main] a:first-child{margin-left:-2px}</style>
 </head>
 <body>
 <div class="col" id="top">

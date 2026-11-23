@@ -38,7 +38,7 @@ img{display:block;max-width:100%;height:auto}
 .wide{width:min(960px,100vw - 48px);position:relative;left:50%;transform:translateX(-50%)}
 
 /* menu */
-.nav{display:flex;justify-content:center;gap:24px;padding-top:24px;font-size:14px}
+.nav{display:flex;justify-content:flex-start;gap:24px;padding-top:24px;font-size:14px;width:min(960px,100vw - 48px);margin-left:calc(50% - min(480px,50vw - 24px))}
 .nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 2px;text-decoration:none;color:#5c5c5c}
 .nav a:hover{color:#3e6dec}
 .nav a[aria-current]{color:#0a0a0a;text-decoration:underline wavy #3e6dec 1px;text-underline-offset:6px}
@@ -186,7 +186,7 @@ footer a:hover{color:#3e6dec}
   .fitbox{padding:8px}
   .px{border-radius:16px}
 }
-</style>
+nav[aria-label=Main] a:first-child{margin-left:-2px}</style>
 <script>(function(){try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}if(location.hash)return;var t=0,u=false;function top(){if(!u)scrollTo(0,0)}["wheel","touchstart","keydown","mousedown"].forEach(function(n){addEventListener(n,function(){u=true},{passive:true,once:true})});top();addEventListener("DOMContentLoaded",top);addEventListener("load",function(){top();setTimeout(top,150);setTimeout(top,600);setTimeout(top,1200)});addEventListener("pageshow",function(e){if(e.persisted){u=false;top()}})})();</script>
 <style>#talk h2{margin:0 0 16px!important}#talk a:hover{color:#3e6dec!important}#talk button:hover{color:#3e6dec;border-color:#3e6dec!important}#talk button:focus-visible,#talk a:focus-visible{outline:2px solid #3e6dec;outline-offset:2px}</style>
 </head>
