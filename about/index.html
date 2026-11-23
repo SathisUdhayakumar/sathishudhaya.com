@@ -79,16 +79,8 @@ section>h2{margin-top:16px}
 .bel p{margin-top:8px;font-size:14px;line-height:1.5;color:#5c5c5c}
 .nextline{margin-top:72px;font:600 32px/1.25 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px;max-width:640px}
 
-/* contact, like Home */
-.mail{display:inline-block;margin-top:16px;font:600 clamp(28px,5vw,32px)/1.2 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px;text-decoration:none;word-break:break-word}
-.copy{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:16px;padding:0 16px;border:1px solid #e5e5e5;border-radius:999px;background:#fff;font:500 14px/1 'DM Sans',sans-serif;color:#0a0a0a;cursor:pointer}
-.copy:hover{color:#3e6dec;border-color:#3e6dec}
-.reply{margin-top:16px;font-size:14px;color:#5c5c5c}
-.reply i{display:inline-block;width:8px;height:8px;border-radius:4px;background:#16a34a;margin-right:8px}
-.links{display:flex;gap:24px;margin-top:24px;font-size:14px}
-.links a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
 
-footer{margin-top:72px;padding:24px 0 72px;border-top:1px solid #e5e5e5;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:#5c5c5c}
+footer{margin-top:48px;padding-bottom:72px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:#5c5c5c}
 footer a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#5c5c5c;text-decoration:none}
 footer a:hover{color:#3e6dec}
 
@@ -160,15 +152,18 @@ footer a:hover{color:#3e6dec}
 <p class="nextline">Next, I want to build AI products people can trust, in any industry.</p>
 </section>
 
-<section aria-labelledby="s4">
-<p class="label" id="s4">Let’s talk</p>
-<a class="mail" href="mailto:sathisjun1@gmail.com?subject=Hello%20from%20your%20portfolio">sathisjun1@gmail.com</a><br>
-<button class="copy" type="button" data-mail="sathisjun1@gmail.com"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button>
-<p class="reply"><i aria-hidden="true"></i>I usually reply within 24 hours.</p>
-<div class="links">
-<a href="https://www.linkedin.com/in/sathisudhaya/" target="_blank" rel="noopener" aria-label="LinkedIn profile (opens in new tab)">LinkedIn ↗</a>
-<a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)">Resume ↗</a>
+<section id="talk" aria-labelledby="tk-h">
+<h2 id="tk-h" style="margin:0 0 16px;font:400 14px/1.4 'DM Sans',sans-serif;letter-spacing:0;color:#5c5c5c">Let’s talk</h2>
+<div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px">
+<a id="tk-mail" href="mailto:sathisjun1@gmail.com?subject=Hello%20from%20your%20portfolio" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:32px;line-height:1.2;letter-spacing:-0.6px;color:#0a0a0a;text-decoration:none;overflow-wrap:anywhere">sathisjun1@gmail.com</a>
+<button type="button" class="copy" data-mail="sathisjun1@gmail.com" aria-label="Copy email address" style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:1px 12px 0;border-radius:999px;border:1px solid #e5e5e5;background:#ffffff;color:#0a0a0a;font:500 13px/1 'DM Sans',sans-serif;cursor:pointer"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span>Copy</span></button>
+<span id="tk-st" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></span>
 </div>
+<p style="margin:8px 0 0;display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;font-size:14px;line-height:1.5;color:#5c5c5c"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#16a34a;flex:none"></span>I usually reply within 24 hours · It’s <span id="tk-clock" style="color:#0a0a0a;font-variant-numeric:tabular-nums">--:--</span> in Coimbatore</p>
+<nav aria-label="Elsewhere" style="margin-top:32px;display:flex;flex-wrap:wrap;gap:0 24px;font-size:14px">
+<a href="https://www.linkedin.com/in/sathisudhaya/" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)" style="display:inline-flex;align-items:center;min-height:44px;color:#0a0a0a;text-decoration:none">LinkedIn ↗</a>
+<a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)" style="display:inline-flex;align-items:center;min-height:44px;color:#0a0a0a;text-decoration:none">Resume ↗</a>
+</nav>
 </section>
 </main>
 
@@ -178,8 +173,9 @@ footer a:hover{color:#3e6dec}
 </footer>
 </div>
 <script>
-document.querySelector('.copy').addEventListener('click',function(){var b=this,s=b.querySelector('span');function done(){s.textContent='Copied';setTimeout(function(){s.textContent='Copy'},1600)}
-try{navigator.clipboard.writeText(b.dataset.mail).then(done,done)}catch(e){done()}});
+(function(){var c=document.getElementById('tk-clock');function t(){try{c.textContent=new Date().toLocaleTimeString('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit'}).toLowerCase()}catch(e){}}t();setInterval(t,30000);
+var b=document.querySelector('.copy'),l=b.querySelector('span'),st=document.getElementById('tk-st');
+b.addEventListener('click',function(){function done(){l.textContent='Copied';st.textContent='Email address copied';setTimeout(function(){l.textContent='Copy';st.textContent=''},1600)}try{navigator.clipboard.writeText(b.dataset.mail).then(done,done)}catch(e){done()}})})();
 </script>
 </body>
 </html>
