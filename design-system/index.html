@@ -153,6 +153,7 @@ footer a:hover{color:#3e6dec}
 }
 </style>
 <script>(function(){try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}if(location.hash)return;var t=0,u=false;function top(){if(!u)scrollTo(0,0)}["wheel","touchstart","keydown","mousedown"].forEach(function(n){addEventListener(n,function(){u=true},{passive:true,once:true})});top();addEventListener("DOMContentLoaded",top);addEventListener("load",function(){top();setTimeout(top,150);setTimeout(top,600);setTimeout(top,1200)});addEventListener("pageshow",function(e){if(e.persisted){u=false;top()}})})();</script>
+<style>#talk h2{margin:0 0 16px!important}#talk a:hover{color:#3e6dec!important}#talk button:hover{color:#3e6dec;border-color:#3e6dec!important}#talk button:focus-visible,#talk a:focus-visible{outline:2px solid #3e6dec;outline-offset:2px}</style>
 </head>
 <body>
 <div class="col" id="top">
@@ -357,6 +358,19 @@ footer a:hover{color:#3e6dec}
 <section aria-label="Next case study" style="padding-top:120px">
 <a class="next" href="/spi/"><span><span class="label" style="display:block">Next case study</span><span class="t">SPI Service app</span><span class="s">SPI Equipments · Mobile app</span></span><span class="a" aria-hidden="true">→</span></a>
 </section>
+<section id="talk" aria-labelledby="tk-h" style="padding-top:72px">
+<h2 id="tk-h" style="margin:0 0 16px;font:400 14px/1.4 'DM Sans',sans-serif;letter-spacing:0;color:#5c5c5c">Let’s talk</h2>
+<div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px">
+<a id="tk-mail" href="mailto:sathisjun1@gmail.com?subject=Hello%20from%20your%20portfolio" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:32px;line-height:1.2;letter-spacing:-0.6px;color:#0a0a0a;text-decoration:none;overflow-wrap:anywhere">sathisjun1@gmail.com</a>
+<button type="button" class="copy" data-mail="sathisjun1@gmail.com" aria-label="Copy email address" style="display:inline-flex;align-items:center;gap:6px;height:32px;padding:1px 12px 0;border-radius:999px;border:1px solid #e5e5e5;background:#ffffff;color:#0a0a0a;font:500 13px/1 'DM Sans',sans-serif;cursor:pointer"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg><span>Copy</span></button>
+<span id="tk-st" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></span>
+</div>
+<p style="margin:8px 0 0;display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;font-size:14px;line-height:1.5;color:#5c5c5c"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#16a34a;flex:none"></span>I usually reply within 24 hours · It’s <span id="tk-clock" style="color:#0a0a0a;font-variant-numeric:tabular-nums">--:--</span> in Coimbatore</p>
+<nav aria-label="Elsewhere" style="margin-top:32px;display:flex;flex-wrap:wrap;gap:0 24px;font-size:14px">
+<a href="https://www.linkedin.com/in/sathisudhaya/" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)" style="display:inline-flex;align-items:center;min-height:44px;color:#0a0a0a;text-decoration:none">LinkedIn ↗</a>
+<a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)" style="display:inline-flex;align-items:center;min-height:44px;color:#0a0a0a;text-decoration:none">Resume ↗</a>
+</nav>
+</section>
 </main>
 
 <footer>
@@ -370,6 +384,11 @@ function set(on){f.classList.toggle('is-full',on);document.documentElement.class
 b.addEventListener('click',function(){set(!f.classList.contains('is-full'))});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&f.classList.contains('is-full'))set(false)});
 })();
+</script>
+<script>
+(function(){var c=document.getElementById('tk-clock');function t(){try{c.textContent=new Date().toLocaleTimeString('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit'}).toLowerCase()}catch(e){}}t();setInterval(t,30000);
+var b=document.querySelector('.copy'),l=b.querySelector('span'),st=document.getElementById('tk-st');
+b.addEventListener('click',function(){function done(){l.textContent='Copied';st.textContent='Email address copied';setTimeout(function(){l.textContent='Copy';st.textContent=''},1600)}try{navigator.clipboard.writeText(b.dataset.mail).then(done,done)}catch(e){done()}})})();
 </script>
 </body>
 </html>
