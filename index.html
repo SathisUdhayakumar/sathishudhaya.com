@@ -88,6 +88,14 @@ a{color:#0a0a0a}a:hover{color:#3e6dec}
 .pgrid .g5{background:radial-gradient(70% 140% at 100% 0%,#e6dcfb 0%,rgba(230,220,251,0) 65%),radial-gradient(60% 120% at 0% 100%,#f3eefd 0%,rgba(243,238,253,0) 70%),#faf8fe}
 @media (max-width:700px){.pgrid{grid-template-columns:1fr;gap:16px}.pgrid article{aspect-ratio:auto;min-height:240px;padding:24px}.pgrid .go{right:20px;top:20px}.pgrid h3{font-size:24px}.pgrid .r{font-size:20px}}
 @media (prefers-reduced-motion:reduce){.pgrid article,.pgrid .go{transition:none}.pgrid article:hover{transform:none}}
+.pgrid article{aspect-ratio:2/1;padding:28px;isolation:isolate}
+.pgrid article.wide{aspect-ratio:auto;min-height:200px}
+.pgrid .go{right:24px;top:24px;z-index:2}
+.pgrid article::after{content:"";position:absolute;inset:0;background:rgba(250,250,250,.62);z-index:0;transition:opacity .3s ease;pointer-events:none}
+.pgrid article>p,.pgrid article>div{position:relative;z-index:1}
+.pgrid article:hover::after,.pgrid article:focus-within::after{opacity:0}
+@media (max-width:700px){.pgrid article{aspect-ratio:auto;min-height:200px;padding:24px}.pgrid .go{right:20px;top:20px}}
+@media (prefers-reduced-motion:reduce){.pgrid article::after{transition:none}}
 </style><div id="wk-track" class="pgrid" role="list" aria-label="Selected work">
 <article class="g1" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Krane · AI tool · Web</p><div><h3><a href="/autolog/">AutoLog</a></h3><p class="r">2 weeks <em>→</em> half a day</p><p class="s">to turn a 500-page spec into a procurement log</p></div></article>
 <article class="g2" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Krane · Dashboard · Web and mobile</p><div><h3><a href="/delivery-board/">Delivery Board</a></h3><p class="r">9 in 10 visits</p><p class="s">moved to the new board within weeks</p></div></article>
@@ -127,7 +135,7 @@ a{color:#0a0a0a}a:hover{color:#3e6dec}
 <button type="button" aria-label="Copy email address" style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 1px 12px 0; border-radius: 999px; border: 1px solid #e5e5e5; background: #ffffff; color: #0a0a0a; font-size: 13px; font-weight: 500" data-dc-click="h1"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>Copy</button>
 <span role="status" aria-live="polite" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)"></span>
 </div>
-<p style="margin: 8px 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font-size: 14px; line-height: 1.5; color: #5c5c5c"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #16a34a; flex: none"></span>I usually reply within 24 hours · It’s <span style="color: #0a0a0a; font-variant-numeric: tabular-nums">9:40 pm</span> in Coimbatore</p>
+<p style="margin: 8px 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font-size: 14px; line-height: 1.5; color: #5c5c5c"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #16a34a; flex: none"></span>I usually reply within 24 hours · It’s <span style="color: #0a0a0a; font-variant-numeric: tabular-nums">9:48 pm</span> in Coimbatore</p>
 <nav aria-label="Elsewhere" style="margin-top: 32px; display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 14px">
 <a href="https://www.linkedin.com/in/sathisudhaya/" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)" style="display: inline-flex; align-items: center; min-height: 44px; color: #0a0a0a; text-decoration: none">LinkedIn ↗</a>
 <a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)" style="display: inline-flex; align-items: center; min-height: 44px; color: #0a0a0a; text-decoration: none">Resume ↗</a>
@@ -185,6 +193,14 @@ a{color:#0a0a0a}a:hover{color:#3e6dec}
 .pgrid .g5{background:radial-gradient(70% 140% at 100% 0%,#e6dcfb 0%,rgba(230,220,251,0) 65%),radial-gradient(60% 120% at 0% 100%,#f3eefd 0%,rgba(243,238,253,0) 70%),#faf8fe}
 @media (max-width:700px){.pgrid{grid-template-columns:1fr;gap:16px}.pgrid article{aspect-ratio:auto;min-height:240px;padding:24px}.pgrid .go{right:20px;top:20px}.pgrid h3{font-size:24px}.pgrid .r{font-size:20px}}
 @media (prefers-reduced-motion:reduce){.pgrid article,.pgrid .go{transition:none}.pgrid article:hover{transform:none}}
+.pgrid article{aspect-ratio:2/1;padding:28px;isolation:isolate}
+.pgrid article.wide{aspect-ratio:auto;min-height:200px}
+.pgrid .go{right:24px;top:24px;z-index:2}
+.pgrid article::after{content:"";position:absolute;inset:0;background:rgba(250,250,250,.62);z-index:0;transition:opacity .3s ease;pointer-events:none}
+.pgrid article>p,.pgrid article>div{position:relative;z-index:1}
+.pgrid article:hover::after,.pgrid article:focus-within::after{opacity:0}
+@media (max-width:700px){.pgrid article{aspect-ratio:auto;min-height:200px;padding:24px}.pgrid .go{right:20px;top:20px}}
+@media (prefers-reduced-motion:reduce){.pgrid article::after{transition:none}}
 </style><div id="wk-track" class="pgrid" role="list" aria-label="Selected work">
 <article class="g1" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Krane · AI tool · Web</p><div><h3><a href="/autolog/">AutoLog</a></h3><p class="r">2 weeks <em>→</em> half a day</p><p class="s">to turn a 500-page spec into a procurement log</p></div></article>
 <article class="g2" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Krane · Dashboard · Web and mobile</p><div><h3><a href="/delivery-board/">Delivery Board</a></h3><p class="r">9 in 10 visits</p><p class="s">moved to the new board within weeks</p></div></article>
