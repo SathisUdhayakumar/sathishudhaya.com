@@ -4,169 +4,107 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About · Sathish Udhayakumar</title>
-<meta name="description" content="Five years in civil engineering, then 5+ in product design at Powerplay and Krane. I design AI tools, web and mobile apps that people trust.">
+<meta name="description" content="Five years in civil engineering, then five in product design at Powerplay and Krane. I design AI tools, web and mobile apps for people doing real work.">
 <link rel="canonical" href="https://sathishudhaya.com/about/">
-<meta property="og:type" content="article">
+<meta property="og:type" content="profile">
 <meta property="og:url" content="https://sathishudhaya.com/about/">
 <meta property="og:title" content="About · Sathish Udhayakumar">
-<meta property="og:description" content="Five years in civil engineering, then 5+ in product design at Powerplay and Krane. I design AI tools, web and mobile apps that people trust.">
+<meta property="og:description" content="Engineer first. Designer now.">
 <meta property="og:image" content="https://sathishudhaya.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
 <style>
-/* Same system as Home (G) and Work (F)
-   Column 720 · spacing 8 16 24 32 48 72 120 · type 13 14 16 20 32 56
-   Text #0a0a0a / #5c5c5c · lines #e5e5e5 / #d4d4d4 · surfaces #f5f5f5 / #fafafa · blue #3e6dec for hover, focus, current */
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:#fff;color:#0a0a0a;font:400 16px/1.6 'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-h1,h2,h3,p,ul,ol,figure,dl,dd,blockquote{margin:0;padding:0}
+h1,h2,h3,p,ul,ol,figure,blockquote,dl,dd{margin:0;padding:0}
 ul,ol{list-style:none}
 a{color:#0a0a0a}
 a:hover{color:#3e6dec}
 a:focus-visible,button:focus-visible{outline:2px solid #3e6dec;outline-offset:2px;border-radius:2px}
-b,strong{font-weight:600}
-img{display:block;max-width:100%;height:auto}
-
+b{font-weight:600}
 .col{max-width:768px;margin:0 auto;padding:0 24px}
-.wide{width:min(960px,100vw - 48px);position:relative;left:50%;transform:translateX(-50%)}
 
-/* menu */
 .nav{display:flex;justify-content:center;gap:24px;padding-top:24px;font-size:14px}
 .nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 2px;text-decoration:none;color:#5c5c5c}
 .nav a:hover{color:#3e6dec}
 .nav a[aria-current]{color:#0a0a0a;text-decoration:underline wavy #3e6dec 1px;text-underline-offset:6px}
 
-/* type */
 .label{font-size:14px;line-height:1.4;color:#5c5c5c}
 h1{font:600 clamp(40px,7vw,56px)/1.08 'Bricolage Grotesque',sans-serif;letter-spacing:-1.4px}
 h2{font:600 32px/1.2 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
-h3{font:600 20px/1.3 'Bricolage Grotesque',sans-serif;letter-spacing:-.2px}
 .lead{font-size:20px;line-height:1.5;color:#5c5c5c;max-width:640px}
-.body{max-width:640px}
-.body+.body{margin-top:16px}
-.note{font-size:13px;line-height:1.5;color:#5c5c5c}
-.muted{color:#5c5c5c}
 
-/* rhythm */
 header{padding-top:120px}
 header h1{margin-top:16px}
 header .lead{margin-top:32px}
 section{padding-top:120px}
 section>h2{margin-top:16px}
-section>h2+.body,section>h2+.lead{margin-top:16px}
-.blk{margin-top:72px}
-.blk>h3+.body{margin-top:16px}
-.blk>.label+h3{margin-top:8px}
-figure{margin-top:32px}
-figcaption{margin-top:16px;font-size:13px;line-height:1.5;color:#5c5c5c;max-width:640px}
 
-.wide>figcaption{margin-left:max(0px,(100% - 720px)/2)}
+/* story: plain reading text */
+.story p{max-width:640px;font-size:18px;line-height:1.65}
+.story p+p{margin-top:24px}
+.story .q{margin:56px 0;padding:0;font:600 32px/1.25 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px;max-width:640px}
+.story .q::before{content:"“";color:#a3a3a3}
+.story .q::after{content:"”";color:#a3a3a3}
 
-/* results: number + what it measures */
-.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;margin-top:48px}
-.res>div{padding:24px 24px 24px 0}
-.res>div+div{padding-left:24px;border-left:1px solid #e5e5e5}
-.res .n{font:600 32px/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
-.res .l{margin-top:8px;font-size:14px;line-height:1.5;color:#5c5c5c}
+/* years: one bar, to scale */
+.bar{display:flex;gap:4px;margin-top:40px;height:12px}
+.bar span{border-radius:6px}
+.k1{background:#d4d4d4}
+.k2{background:#5c5c5c}
+.k3{background:#0a0a0a}
+.yrs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:24px}
+.yrs li{font-size:14px;line-height:1.5;color:#5c5c5c}
+.yrs b{display:block;font:600 32px/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px;color:#0a0a0a}
+.yrs i{display:inline-block;width:8px;height:8px;border-radius:4px;margin-right:8px;font-style:normal}
 
-/* rows, like Experience on Home */
-.rows{border-bottom:1px solid #e5e5e5}
-.rows>div{display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px solid #e5e5e5;font-size:14px;line-height:1.5}
-.rows dt,.rows .k{color:#5c5c5c}
-.rows.tri>div{grid-template-columns:160px minmax(0,1fr) minmax(0,1fr)}
-.rows .hd{color:#5c5c5c;padding:8px 0}
-.facts{margin-top:48px}
-.facts+.note{margin-top:16px}
+/* timeline: year, then what happened */
+.tl{margin-top:56px;border-top:1px solid #e5e5e5}
+.tl li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:24px;padding:24px 0;border-bottom:1px solid #e5e5e5}
+.tl .y{font:600 20px/1.3 'Bricolage Grotesque',sans-serif;color:#0a0a0a}
+.tl .r{font-weight:500}
+.tl .d{margin-top:4px;font-size:14px;line-height:1.5;color:#5c5c5c}
+.tl .d a{color:#0a0a0a}
+.tl .d a:hover{color:#3e6dec}
 
-/* screens */
-.shot{padding:0}
-.shot img{aspect-ratio:16/10;object-fit:cover;object-position:left top}
-.fitbox{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;border:1px solid #e5e5e5;border-radius:12px;background:#fafafa;box-shadow:0 8px 24px rgba(10,10,10,.06);padding:24px}
-.shot .fitbox img{aspect-ratio:auto;width:auto;height:100%;max-width:100%;border:0;box-shadow:none;background:none}
-.shot img{border-radius:12px;border:1px solid #e5e5e5;width:100%;background:#fff;box-shadow:0 8px 24px rgba(10,10,10,.06)}
+/* beliefs */
+.bel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:40px}
+.bel h3{font:600 20px/1.3 'Bricolage Grotesque',sans-serif;letter-spacing:-.2px}
+.bel p{margin-top:8px;font-size:14px;line-height:1.5;color:#5c5c5c}
+.nextline{margin-top:72px;font:600 32px/1.25 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px;max-width:640px}
 
-.shot.free img{aspect-ratio:auto;object-fit:initial}
-.next .s{margin-left:8px;font-size:16px;color:#5c5c5c}
-@media (max-width:600px){.next .s{display:block;margin:4px 0 0}}
-/* quote, like Kind words */
-blockquote{margin-top:32px;border-left:0;font-size:20px;line-height:1.5;max-width:640px}
-blockquote+p{margin-top:8px}
+/* contact, like Home */
+.mail{display:inline-block;margin-top:16px;font:600 clamp(28px,5vw,32px)/1.2 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px;text-decoration:none;word-break:break-word}
+.copy{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:16px;padding:0 16px;border:1px solid #e5e5e5;border-radius:999px;background:#fff;font:500 14px/1 'DM Sans',sans-serif;color:#0a0a0a;cursor:pointer}
+.copy:hover{color:#3e6dec;border-color:#3e6dec}
+.reply{margin-top:16px;font-size:14px;color:#5c5c5c}
+.reply i{display:inline-block;width:8px;height:8px;border-radius:4px;background:#16a34a;margin-right:8px}
+.links{display:flex;gap:24px;margin-top:24px;font-size:14px}
+.links a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
 
-/* prototype */
-.px{border:1px solid #e5e5e5;border-radius:24px;overflow:hidden;background:#f5f5f5}
-.px-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px 12px 24px;font-size:14px;color:#5c5c5c;border-bottom:1px solid #e5e5e5;background:#fafafa}
-.px-bar a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#0a0a0a;text-decoration:none}
-.px-bar a:hover{color:#3e6dec}
-.px-bar button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid #e5e5e5;border-radius:999px;background:#fff;color:#0a0a0a;font:500 14px/1 'DM Sans',sans-serif;cursor:pointer}
-.px-bar button:hover{color:#3e6dec;border-color:#3e6dec}
-.px-key{font-size:12px;color:#5c5c5c;border:1px solid #e5e5e5;border-radius:4px;padding:2px 6px}
-.px-fs-close{display:none;align-items:center;gap:8px}
-.px-fig.is-full{transform:none;left:0;width:auto}
-.px-fig.is-full .px{position:fixed;inset:0;z-index:100;border:0;border-radius:0;display:flex;flex-direction:column}
-.px-fig.is-full .px-stage{aspect-ratio:auto;flex:1}
-.px-fig.is-full .px-stage iframe{display:block}
-.px-fig.is-full .px-poster{display:none}
-.px-fig.is-full .px-fs-open{display:none}
-.px-fig.is-full .px-fs-close{display:inline-flex}
-html.px-lock{overflow:hidden}
-.px-stage{position:relative;aspect-ratio:1440/900;background:#fff}
-.px-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.px-poster{display:none}
-@media (max-width:760px){
-  .px-stage iframe{display:none}
-  .px-poster{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left top}
-}
-
-/* flag reasons */
-.flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:24px}
-.flags li{font-size:14px;line-height:1.5;color:#5c5c5c}
-.flags b{display:block;color:#0a0a0a;font-weight:500}
-
-/* next + footer */
-.next{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:24px 0;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;text-decoration:none;color:#0a0a0a}
-.next .t{font:600 20px/1.3 'Bricolage Grotesque',sans-serif}
-.next:hover .t,.next:hover .a{color:#3e6dec}
-.next .a{font-size:14px;color:#5c5c5c;white-space:nowrap}
-footer{margin-top:48px;padding-bottom:72px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:#5c5c5c}
+footer{margin-top:72px;padding:24px 0 72px;border-top:1px solid #e5e5e5;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:#5c5c5c}
 footer a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#5c5c5c;text-decoration:none}
 footer a:hover{color:#3e6dec}
 
 @media (max-width:600px){
-  header{padding-top:72px}
-  section{padding-top:72px}
-  .blk{margin-top:48px}
+  header,section{padding-top:72px}
   h2{font-size:24px;letter-spacing:-.3px}
-  .res>div,.res>div+div{padding:16px 0;border-left:0}
-  .res>div+div{border-top:1px solid #e5e5e5}
-  .rows>div,.rows.tri>div{grid-template-columns:minmax(0,1fr);gap:4px}
-  .rows .hd{display:none!important}
-  .shot img,.fitbox{border-radius:8px}
-  .fitbox{padding:8px}
-  .px{border-radius:16px}
+  .story p{font-size:16px}
+  .story .q{margin:40px 0;font-size:24px;letter-spacing:-.3px}
+  .yrs{grid-template-columns:1fr;gap:16px}
+  .yrs li{display:flex;align-items:baseline;gap:12px}
+  .yrs b{display:inline;font-size:24px}
+  .tl li{grid-template-columns:1fr;gap:4px}
+  .bel{grid-template-columns:1fr;gap:24px}
+  .nextline{margin-top:56px;font-size:24px;letter-spacing:-.3px}
 }
-
-/* two pictures side by side */
-.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.two figcaption{margin-top:8px}
-.two figure{margin-top:0}
-.two img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;border-radius:12px;border:1px solid #e5e5e5}
-/* project links with a picture */
-.deep{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
-.deep a{display:block;text-decoration:none;color:#0a0a0a}
-.deep img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:left top;border-radius:12px;border:1px solid #e5e5e5;box-shadow:0 8px 24px rgba(10,10,10,.06)}
-.deep .t{display:block;margin-top:16px;font:600 20px/1.3 'Bricolage Grotesque',sans-serif}
-.deep .s{display:block;margin-top:4px;font-size:14px;color:#5c5c5c}
-.deep a:hover .t{color:#3e6dec}
-@media (max-width:600px){.two,.deep{grid-template-columns:1fr}.two img,.deep img{border-radius:8px}}
 </style>
-<script>(function(){try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}if(location.hash)return;var t=0,u=false;function top(){if(!u)scrollTo(0,0)}["wheel","touchstart","keydown","mousedown"].forEach(function(n){addEventListener(n,function(){u=true},{passive:true,once:true})});top();addEventListener("DOMContentLoaded",top);addEventListener("load",function(){top();setTimeout(top,150);setTimeout(top,600);setTimeout(top,1200)});addEventListener("pageshow",function(e){if(e.persisted){u=false;top()}})})();</script>
 </head>
 <body>
 <div class="col" id="top">
@@ -183,81 +121,55 @@ footer a:hover{color:#3e6dec}
 <p class="label">About</p>
 <h1>Engineer first. Designer now.</h1>
 <p class="lead">Five years in civil engineering gave me a habit I still use: understand the system before you change it. I bring that to every product I design, from AI agents to web and mobile apps.</p>
-
-<div class="res" role="list" aria-label="Results">
-<div role="listitem"><p class="n">5 yrs</p><p class="l">civil engineering: site, quality and R&amp;D</p></div>
-<div role="listitem"><p class="n">3.5 yrs</p><p class="l">product designer at Powerplay</p></div>
-<div role="listitem"><p class="n">1.5+ yrs</p><p class="l">senior product designer at Krane</p></div>
-</div>
 </header>
 
-<section aria-labelledby="s1">
-<p class="label">Who I am</p>
-<h2 id="s1">Start with the real work, not the screens</h2>
-<p class="body">I started as a site engineer on building sites. Then I tested concrete and ran R&amp;D projects. In 2021 I joined Powerplay, a construction software company, as a product designer.</p>
-<p class="body">Since April 2025 I’ve led design at Krane. Most of my work is deciding <b>what the AI does on its own, and what a person checks</b>.</p>
-<dl class="rows" style="margin-top:32px">
-<div><dt>An engineer’s eye</dt><dd>For what breaks. Five years on site taught me to plan for failure, not just success.</dd></div>
-<div><dt>A designer’s eye</dt><dd>For people. I design for the person doing the work, not the demo.</dd></div>
-<div><dt>AI people trust</dt><dd>The AI suggests. A person decides.</dd></div>
-</dl>
+<section class="story" aria-labelledby="s1">
+<p class="label">My story</p>
+<h2 id="s1">From the site to software</h2>
+<p style="margin-top:32px">I studied civil engineering and spent five years in it. I started as a site engineer, then tested concrete quality, then ran R&amp;D projects at ESS Construction.</p>
+<p>Along the way I taught myself design. In 2021 I joined Powerplay as a product design intern, and a few months later as its product designer. Powerplay made software for the same site teams I had worked with.</p>
+<blockquote class="q">I ask the right questions to find the why behind the what.</blockquote>
+<p>Since April 2025 I’ve led design at Krane. Most of my work is deciding what the AI does on its own, and what a person checks.</p>
+<p>That’s why I start with the real work. <b>I’ve stood where the users stand.</b></p>
 </section>
 
 <section aria-labelledby="s2">
-<p class="label">Why design</p>
-<h2 id="s2">From the site to software</h2>
-<blockquote>I ask the right questions to find the why behind the what.</blockquote>
-<p class="body" style="margin-top:32px">I studied civil engineering and spent five years in it: site engineer, then concrete quality testing, then R&amp;D projects at ESS Construction.</p>
-<p class="body">Along the way I taught myself design. In 2021 I joined Powerplay as a product design intern, and a few months later as a product designer. Powerplay made software for the same site teams I had worked with.</p>
-<p class="body">That’s why I start with the real work. <b>I’ve stood where the users stand.</b></p>
-<p class="body"><b>Next, I want to build AI products people can trust, in any industry.</b></p>
+<p class="label">My years</p>
+<h2 id="s2">5 years in engineering, then 5+ in design</h2>
+<div class="bar" aria-hidden="true"><span class="k1" style="flex:5"></span><span class="k2" style="flex:3.5"></span><span class="k3" style="flex:1.6"></span></div>
+<ul class="yrs">
+<li><b>5 yrs</b><span><i class="k1"></i>Civil engineering</span></li>
+<li><b>3.5 yrs</b><span><i class="k2"></i>Product design, Powerplay</span></li>
+<li><b>1.5+ yrs</b><span><i class="k3"></i>Senior product design, Krane</span></li>
+</ul>
+<ol class="tl">
+<li><span class="y">2016</span><div><p class="r">Civil engineer</p><p class="d">Site engineer, then concrete quality testing, then R&amp;D project manager at ESS Construction.</p></div></li>
+<li><span class="y">2021</span><div><p class="r">Product Designer · Powerplay</p><p class="d">A mobile app for site teams new to apps, and tools for the office. <a href="/powerplay/">Powerplay case study</a></p></div></li>
+<li><span class="y">2025</span><div><p class="r">Senior Product Designer · Krane</p><p class="d">AI agents and tools for construction teams. <a href="/autolog/">AutoLog case study</a></p></div></li>
+</ol>
 </section>
 
 <section aria-labelledby="s3">
-<p class="label">My journey</p>
-<h2 id="s3">5 years in engineering, then 5+ in design</h2>
-
-<div class="blk">
-<p class="label">2016 – 2021 · Site</p>
-<h3>Civil engineer · ESS Construction and others</h3>
-<p class="body">I worked on building sites, tested concrete quality, and ran R&amp;D projects.</p>
-<dl class="rows" style="margin-top:24px">
-<div><dt>2016 – 2017</dt><dd>Site engineer</dd></div>
-<div><dt>2017 – 2019</dt><dd>Quality assurance, concrete testing</dd></div>
-<div><dt>2019 – 2021</dt><dd>R&amp;D project manager · ESS Construction</dd></div>
-</dl>
+<p class="label">What I believe</p>
+<h2 id="s3">Start with the real work, not the screens</h2>
+<div class="bel">
+<div><h3>Plan for what breaks</h3><p>Five years on site taught me to plan for failure, not just success.</p></div>
+<div><h3>Design for the person</h3><p>The person doing the work, not the demo.</p></div>
+<div><h3>People stay in charge</h3><p>The AI suggests. A person decides.</p></div>
 </div>
-
-<div class="blk">
-<p class="label">Sep 2021 – Mar 2025 · Product</p>
-<h3>Product Designer · Powerplay</h3>
-<p class="body">I joined as a design intern, then became its product designer. I designed its mobile app for site teams, many of them new to apps, and its tools for the office. <a href="/powerplay/">Read the Powerplay case study</a></p>
-<figure class="wide">
-<div class="shot free"><img src="img/ab-powerplay.webp" alt="Recreated Powerplay screens: the field app’s daily report next to the office projects dashboard." loading="lazy"></div>
-</figure>
-</div>
-
-<div class="blk">
-<p class="label">Apr 2025 – now · AI</p>
-<h3>Senior Product Designer · Krane</h3>
-<p class="body">I design AI agents and tools for construction teams. The hard part is deciding <b>what the AI does on its own, and what a person checks</b>. <a href="/autolog/">Read the AutoLog case study</a></p>
-<figure class="wide">
-<div class="shot free"><img src="img/ab-krane.webp" alt="Recreated Krane AI tool screen, with made-up data." loading="lazy"></div>
-<figcaption>Krane work is under NDA, so all screens use made-up data.</figcaption>
-</figure>
-</div>
+<p class="nextline">Next, I want to build AI products people can trust, in any industry.</p>
 </section>
 
 <section aria-labelledby="s4">
-<p class="label">Where next</p>
-<h2 id="s4">Keep going</h2>
-<div style="margin-top:32px">
-<a class="next" href="/work/"><span><span class="t">See the work</span><span class="s">Seven case studies, from AI to mobile</span></span><span class="a" aria-hidden="true">→</span></a>
-<a class="next" style="border-top:0" href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Read my resume, PDF (opens in new tab)"><span><span class="t">Read my resume</span><span class="s">Roles, projects and results on one page</span></span><span class="a" aria-hidden="true">↗</span></a>
-<a class="next" style="border-top:0" href="mailto:sathisjun1@gmail.com?subject=Hello%20from%20your%20portfolio"><span><span class="t">Email me</span><span class="s">I usually reply within 24 hours</span></span><span class="a" aria-hidden="true">→</span></a>
+<p class="label" id="s4">Let’s talk</p>
+<a class="mail" href="mailto:sathisjun1@gmail.com?subject=Hello%20from%20your%20portfolio">sathisjun1@gmail.com</a><br>
+<button class="copy" type="button" data-mail="sathisjun1@gmail.com"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button>
+<p class="reply"><i aria-hidden="true"></i>I usually reply within 24 hours.</p>
+<div class="links">
+<a href="https://www.linkedin.com/in/sathisudhaya/" target="_blank" rel="noopener" aria-label="LinkedIn profile (opens in new tab)">LinkedIn ↗</a>
+<a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)">Resume ↗</a>
 </div>
 </section>
-
 </main>
 
 <footer>
@@ -265,5 +177,9 @@ footer a:hover{color:#3e6dec}
 <a href="#top">Back to top <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></a>
 </footer>
 </div>
+<script>
+document.querySelector('.copy').addEventListener('click',function(){var b=this,s=b.querySelector('span');function done(){s.textContent='Copied';setTimeout(function(){s.textContent='Copy'},1600)}
+try{navigator.clipboard.writeText(b.dataset.mail).then(done,done)}catch(e){done()}});
+</script>
 </body>
 </html>
