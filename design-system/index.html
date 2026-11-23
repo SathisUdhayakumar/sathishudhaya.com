@@ -390,6 +390,5 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&f.classList
 var b=document.querySelector('.copy'),l=b.querySelector('span'),st=document.getElementById('tk-st');
 b.addEventListener('click',function(){function done(){l.textContent='Copied';st.textContent='Email address copied';setTimeout(function(){l.textContent='Copy';st.textContent=''},1600)}try{navigator.clipboard.writeText(b.dataset.mail).then(done,done)}catch(e){done()}})})();
 </script>
-<script src="/js/rail.js" defer></script>
 </body>
 </html>
