@@ -157,7 +157,7 @@ a{color:#0a0a0a}a:hover{color:#3e6dec}
 <button type="button" aria-label="Copy email address" style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 1px 12px 0; border-radius: 999px; border: 1px solid #e5e5e5; background: #ffffff; color: #0a0a0a; font-size: 13px; font-weight: 500" data-dc-click="h12"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>Copy</button>
 <span role="status" aria-live="polite" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)"></span>
 </div>
-<p style="margin: 8px 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font-size: 14px; line-height: 1.5; color: #5c5c5c"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #16a34a; flex: none"></span>I usually reply within 24 hours · It’s <span style="color: #0a0a0a; font-variant-numeric: tabular-nums">5:55 pm</span> in Coimbatore</p>
+<p style="margin: 8px 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font-size: 14px; line-height: 1.5; color: #5c5c5c"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #16a34a; flex: none"></span>I usually reply within 24 hours · It’s <span style="color: #0a0a0a; font-variant-numeric: tabular-nums">6:26 pm</span> in Coimbatore</p>
 <nav aria-label="Elsewhere" style="margin-top: 32px; display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 14px">
 <a href="https://www.linkedin.com/in/sathisudhaya/" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)" style="display: inline-flex; align-items: center; min-height: 44px; color: #0a0a0a; text-decoration: none">LinkedIn ↗</a>
 <a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)" style="display: inline-flex; align-items: center; min-height: 44px; color: #0a0a0a; text-decoration: none">Resume ↗</a>
@@ -415,6 +415,16 @@ class Component extends DCLogic {
   }
 }
 dcMount(Component, 'dc-tpl', 'dc-root');
+</script>
+<script>
+/* whole card opens its case study; the demo's own controls keep working */
+(function(){var Q='#wk-track article';
+document.addEventListener('click',function(e){var c=e.target.closest&&e.target.closest(Q);if(!c||e.defaultPrevented||e.button!==0)return;
+if(e.target.closest('a,button,input,textarea,select,label,[role=button],[data-dc-click]'))return;
+if(String(window.getSelection&&getSelection()||'').length)return;
+var l=c.querySelector('a[href^="/"]');if(!l)return;
+if(e.metaKey||e.ctrlKey||e.shiftKey){window.open(l.href,'_blank');return}location.href=l.href;});
+var st=document.createElement('style');st.textContent=Q+'{cursor:pointer}'+Q+' :is(a,button,input,[data-dc-click]){cursor:pointer}';document.head.appendChild(st);})();
 </script>
 <script src="/js/motions.js" defer></script>
 </body>
