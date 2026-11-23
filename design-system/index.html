@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Krane Design System case study · Sathish Udhayakumar</title>
+<meta name="description" content="Krane’s first design tokens, component library and governance. Every new screen is still built on it after handoff.">
+<link rel="canonical" href="https://sathishudhaya.com/design-system/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sathishudhaya.com/design-system/">
+<meta property="og:title" content="Krane Design System case study · Sathish Udhayakumar">
+<meta property="og:description" content="Krane’s first design tokens, component library and governance. Every new screen is still built on it after handoff.">
+<meta property="og:image" content="https://sathishudhaya.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+/* Same system as Home (G) and Work (F)
+   Column 720 · spacing 8 16 24 32 48 72 120 · type 13 14 16 20 32 56
+   Text #0a0a0a / #5c5c5c · lines #e5e5e5 / #d4d4d4 · surfaces #f5f5f5 / #fafafa · blue #3e6dec for hover, focus, current */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:#fff;color:#0a0a0a;font:400 16px/1.6 'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,ol,figure,dl,dd,blockquote{margin:0;padding:0}
+ul,ol{list-style:none}
+a{color:#0a0a0a}
+a:hover{color:#3e6dec}
+a:focus-visible,button:focus-visible{outline:2px solid #3e6dec;outline-offset:2px;border-radius:2px}
+b,strong{font-weight:600}
+img{display:block;max-width:100%;height:auto}
+
+.col{max-width:768px;margin:0 auto;padding:0 24px}
+.wide{width:min(960px,100vw - 48px);position:relative;left:50%;transform:translateX(-50%)}
+
+/* menu */
+.nav{display:flex;justify-content:center;gap:24px;padding-top:24px;font-size:14px}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 2px;text-decoration:none;color:#5c5c5c}
+.nav a:hover{color:#3e6dec}
+.nav a[aria-current]{color:#0a0a0a;text-decoration:underline wavy #3e6dec 1px;text-underline-offset:6px}
+
+/* type */
+.label{font-size:14px;line-height:1.4;color:#5c5c5c}
+h1{font:600 clamp(40px,7vw,56px)/1.08 'Bricolage Grotesque',sans-serif;letter-spacing:-1.4px}
+h2{font:600 32px/1.2 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
+h3{font:600 20px/1.3 'Bricolage Grotesque',sans-serif;letter-spacing:-.2px}
+.lead{font-size:20px;line-height:1.5;color:#5c5c5c;max-width:640px}
+.body{max-width:640px}
+.body+.body{margin-top:16px}
+.note{font-size:13px;line-height:1.5;color:#5c5c5c}
+.muted{color:#5c5c5c}
+
+/* rhythm */
+header{padding-top:120px}
+header h1{margin-top:16px}
+header .lead{margin-top:32px}
+section{padding-top:120px}
+section>h2{margin-top:16px}
+section>h2+.body,section>h2+.lead{margin-top:16px}
+.blk{margin-top:72px}
+.blk>h3+.body{margin-top:16px}
+.blk>.label+h3{margin-top:8px}
+figure{margin-top:32px}
+figcaption{margin-top:16px;font-size:13px;line-height:1.5;color:#5c5c5c;max-width:640px}
+
+.wide>figcaption{margin-left:max(0px,(100% - 720px)/2)}
+
+/* results: number + what it measures */
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;margin-top:48px}
+.res>div{padding:24px 24px 24px 0}
+.res>div+div{padding-left:24px;border-left:1px solid #e5e5e5}
+.res .n{font:600 32px/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
+.res .l{margin-top:8px;font-size:14px;line-height:1.5;color:#5c5c5c}
+
+/* rows, like Experience on Home */
+.rows{border-bottom:1px solid #e5e5e5}
+.rows>div{display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px solid #e5e5e5;font-size:14px;line-height:1.5}
+.rows dt,.rows .k{color:#5c5c5c}
+.rows.tri>div{grid-template-columns:160px minmax(0,1fr) minmax(0,1fr)}
+.rows .hd{color:#5c5c5c;padding:8px 0}
+.facts{margin-top:48px}
+.facts+.note{margin-top:16px}
+
+/* screens */
+.shot{padding:0}
+.shot img{aspect-ratio:16/10;object-fit:cover;object-position:left top}
+.fitbox{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;border:1px solid #e5e5e5;border-radius:12px;background:#fafafa;box-shadow:0 8px 24px rgba(10,10,10,.06);padding:24px}
+.shot .fitbox img{aspect-ratio:auto;width:auto;height:100%;max-width:100%;border:0;box-shadow:none;background:none}
+.shot img{border-radius:12px;border:1px solid #e5e5e5;width:100%;background:#fff;box-shadow:0 8px 24px rgba(10,10,10,.06)}
+
+.shot.free img{aspect-ratio:auto;object-fit:initial}
+.next .s{margin-left:8px;font-size:16px;color:#5c5c5c}
+@media (max-width:600px){.next .s{display:block;margin:4px 0 0}}
+/* quote, like Kind words */
+blockquote{margin-top:32px;border-left:0;font-size:20px;line-height:1.5;max-width:640px}
+blockquote+p{margin-top:8px}
+
+/* prototype */
+.px{border:1px solid #e5e5e5;border-radius:24px;overflow:hidden;background:#f5f5f5}
+.px-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px 12px 24px;font-size:14px;color:#5c5c5c;border-bottom:1px solid #e5e5e5;background:#fafafa}
+.px-bar a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#0a0a0a;text-decoration:none}
+.px-bar a:hover{color:#3e6dec}
+.px-bar button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid #e5e5e5;border-radius:999px;background:#fff;color:#0a0a0a;font:500 14px/1 'DM Sans',sans-serif;cursor:pointer}
+.px-bar button:hover{color:#3e6dec;border-color:#3e6dec}
+.px-key{font-size:12px;color:#5c5c5c;border:1px solid #e5e5e5;border-radius:4px;padding:2px 6px}
+.px-fs-close{display:none;align-items:center;gap:8px}
+.px-fig.is-full{transform:none;left:0;width:auto}
+.px-fig.is-full .px{position:fixed;inset:0;z-index:100;border:0;border-radius:0;display:flex;flex-direction:column}
+.px-fig.is-full .px-stage{aspect-ratio:auto;flex:1}
+.px-fig.is-full .px-stage iframe{display:block}
+.px-fig.is-full .px-poster{display:none}
+.px-fig.is-full .px-fs-open{display:none}
+.px-fig.is-full .px-fs-close{display:inline-flex}
+html.px-lock{overflow:hidden}
+.px-stage{position:relative;aspect-ratio:1440/900;background:#fff}
+.px-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.px-poster{display:none}
+@media (max-width:760px){
+  .px-stage iframe{display:none}
+  .px-poster{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left top}
+}
+
+/* flag reasons */
+.flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:24px}
+.flags li{font-size:14px;line-height:1.5;color:#5c5c5c}
+.flags b{display:block;color:#0a0a0a;font-weight:500}
+
+/* next + footer */
+.next{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:24px 0;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;text-decoration:none;color:#0a0a0a}
+.next .t{font:600 20px/1.3 'Bricolage Grotesque',sans-serif}
+.next:hover .t,.next:hover .a{color:#3e6dec}
+.next .a{font-size:14px;color:#5c5c5c;white-space:nowrap}
+footer{margin-top:48px;padding-bottom:72px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:#5c5c5c}
+footer a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#5c5c5c;text-decoration:none}
+footer a:hover{color:#3e6dec}
+
+@media (max-width:600px){
+  header{padding-top:72px}
+  section{padding-top:72px}
+  .blk{margin-top:48px}
+  h2{font-size:24px;letter-spacing:-.3px}
+  .res>div,.res>div+div{padding:16px 0;border-left:0}
+  .res>div+div{border-top:1px solid #e5e5e5}
+  .rows>div,.rows.tri>div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .rows .hd{display:none!important}
+  .shot img,.fitbox{border-radius:8px}
+  .fitbox{padding:8px}
+  .px{border-radius:16px}
+}
+</style>
+<script>(function(){try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}if(location.hash)return;var t=0,u=false;function top(){if(!u)scrollTo(0,0)}["wheel","touchstart","keydown","mousedown"].forEach(function(n){addEventListener(n,function(){u=true},{passive:true,once:true})});top();addEventListener("DOMContentLoaded",top);addEventListener("load",function(){top();setTimeout(top,150);setTimeout(top,600);setTimeout(top,1200)});addEventListener("pageshow",function(e){if(e.persisted){u=false;top()}})})();</script>
+</head>
+<body>
+<div class="col" id="top">
+
+<nav class="nav" aria-label="Main">
+<a href="/">Home</a>
+<a href="/work/" aria-current="page">Work</a>
+<a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)">Resume</a>
+</nav>
+
+<main>
+<header>
+<p class="label"><span style="color:#0a0a0a">Krane</span> · Design system · 2025 – 2026</p>
+<h1>Krane Design System: one set of rules for every screen</h1>
+<p class="lead">I was Krane’s only designer. I built its first design tokens, the component library and the rules that keep them healthy.</p>
+
+<div class="res" role="list" aria-label="Results">
+<div role="listitem"><p class="n">Every</p><p class="l">new screen is still built on it, months after handoff</p></div>
+<div role="listitem"><p class="n">4 tools</p><p class="l">Figma, CSS, JavaScript and TypeScript use the same names</p></div>
+<div role="listitem"><p class="n">1 fix</p><p class="l">reaches every screen</p></div>
+</div>
+
+<dl class="rows facts">
+<div><dt>Role</dt><dd>Senior Product Designer</dd></div>
+<div><dt>My part</dt><dd>Tokens, type, components, docs and audits</dd></div>
+<div><dt>Timeline</dt><dd>4–5 months, handed off in early 2026</dd></div>
+<div><dt>Status</dt><dd><span aria-hidden="true" style="display:inline-block;width:8px;height:8px;border-radius:4px;background:#16a34a;margin-right:8px"></span>Live, the base for every new screen</dd></div>
+</dl>
+<p class="note">Krane work is under NDA, so all screens use made-up data.</p>
+</header>
+
+<section aria-labelledby="s1">
+<p class="label">The problem</p>
+<h2 id="s1">The same decisions, made again on every screen</h2>
+<p class="body">Each new screen meant choosing colours, sizes and spacing again, and engineers rebuilt the same parts in different ways. My audit found the same button built several ways, one-off greys typed straight into screens, and parts rebuilt more than once.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/ds-before-after.webp" alt="Before: the same button, grey and status colour made in several slightly different ways. After: one of each, from the system, with its name." loading="lazy"></div>
+<figcaption>Before, several versions of each. After, <b>one version with a name</b>.</figcaption>
+</figure>
+
+<div class="blk">
+<h3>Four layers, each built on the one before</h3>
+<p class="body">Primitive tokens hold raw values. Semantic tokens say what a value is for. Components use only semantic tokens, and screens use only components. So <b>a change at layer 1 or 2 reaches every screen</b>, and nobody edits a colour on a single screen.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/ds-layers.webp" alt="Four layers: primitive tokens, semantic tokens, components, product screens." loading="lazy"></div>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="s2">
+<p class="label">Foundations</p>
+<h2 id="s2">One set of names, in Figma and in code</h2>
+<p class="body">The names had to work in Figma, CSS, JavaScript and TypeScript. I compared four ways to write them and chose <b>dot notation</b>. Every semantic token has a light and a dark value, so <b>a theme is a change of values, not a redesign</b>.</p>
+
+<figure>
+<div class="rows tri" role="table" aria-label="Four naming styles compared">
+<div class="hd" role="row"><span role="columnheader">Style</span><span role="columnheader">Example</span><span role="columnheader">What happens</span></div>
+<div role="row"><span class="k" role="rowheader">Flat</span><span role="cell" class="muted">blue600</span><span role="cell" class="muted">No clear groups once there are hundreds of tokens.</span></div>
+<div role="row"><span class="k" role="rowheader">Hyphen</span><span role="cell" class="muted">font-size-14</span><span role="cell" class="muted">You can’t tell where the group ends and the name begins.</span></div>
+<div role="row"><span class="k" role="rowheader">Underscore</span><span role="cell" class="muted">space_4</span><span role="cell" class="muted">Clear, but no tool nests it as a group.</span></div>
+<div role="row"><span class="k" role="rowheader">Dot, chosen</span><span role="cell"><b>color.yellow.500</b></span><span role="cell"><b>Each dot is a level</b>, and it turns into the format each tool expects.</span></div>
+</div>
+</figure>
+
+<figure class="wide">
+<div class="shot free"><img src="img/ds-figma-code.webp" alt="Figma variables with light and dark values next to the token file and the CSS it creates." loading="lazy"></div>
+<figcaption>The same names in Figma, the token file and the CSS built from it.</figcaption>
+</figure>
+
+<div class="blk">
+<h3>The foundations</h3>
+<p class="body"><b>88 primitive tokens in 11 categories</b>, from colour and spacing to motion and breakpoints. These are the ones people see most.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/ds-foundations.webp" alt="Foundations: colour ramps and semantic colours, type scale, spacing scale and corner radius." loading="lazy"></div>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="s3">
+<p class="label">Colour</p>
+<h2 id="s3">One yellow, used with care</h2>
+<p class="body">Krane’s brand yellow was already chosen. My job was to make it work in the product. Used everywhere, yellow makes a busy table hard to read, so I wrote three rules.</p>
+<dl class="rows" style="margin-top:32px">
+<div><dt>One per view</dt><dd><b>One yellow button per view.</b> Black on yellow is 12.2 : 1 in both themes, well above the 4.5 : 1 minimum.</dd></div>
+<div><dt>Brand and action only</dt><dd>Selected filters and rows stay neutral grey, so the data stays in front.</dd></div>
+<div><dt>Never a warning</dt><dd>No yellow text on white. “Needs check” is orange, so a status never looks like the brand.</dd></div>
+</dl>
+<figure class="wide">
+<div class="shot free"><img src="img/ds-yellow.webp" alt="How the brand yellow and the action colour work in light and dark themes, with contrast ratios." loading="lazy"></div>
+</figure>
+
+<div class="blk">
+<h3>Status colours: one meaning each</h3>
+<p class="body">Construction teams scan long tables for what needs attention. Each status has <b>one colour and one job</b>, sits apart from the yellow, and always comes with a word, never colour alone. Every pair passes WCAG AA in both themes.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/ds-status.webp" alt="Status colours with their meaning and contrast in light and dark themes: Ready, Needs check, Error, Suggested, Draft and Brand." loading="lazy"></div>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="s4">
+<p class="label">Components</p>
+<h2 id="s4">Built once, used everywhere</h2>
+<p class="body">Each component gets a written spec with <b>every state</b> before it’s built: default, focus, error, disabled and loading. It uses only semantic tokens and handles accessibility itself.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/ds-components.webp" alt="Component sheet: buttons, input and label, status pills, sidebar item, table row actions, confirm dialog, checkbox with bulk bar, and toast." loading="lazy"></div>
+</figure>
+
+<div class="blk">
+<h3>Every component has a page</h3>
+<p class="body">When to use it, its props, do and don’t, and an accessibility checklist. Designers and engineers read the same page, so <b>answers don’t depend on me</b>. The same idea always has the same prop name, so if you know one component, you know them all.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/ds-docs.webp" alt="Documentation page for the Button component: usage, do and don’t examples, props and an accessibility checklist." loading="lazy"></div>
+</figure>
+</div>
+
+<div class="blk">
+<h3>Same components, two themes</h3>
+<p class="body">The proof that the layers work: both screens use the same components. <b>Only the semantic tokens change.</b></p>
+<figure class="wide">
+<div class="shot free"><img src="img/ds-themes.webp" alt="The same Run 4 results screen in the light theme and the dark theme." loading="lazy"></div>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="s5">
+<p class="label">Adoption</p>
+<h2 id="s5">Making the system the easiest way to build</h2>
+<p class="body">The hardest part was time. Feature work always came first, so there was no room to move old screens over. So I made using the system easier than not using it.</p>
+<dl class="rows" style="margin-top:32px">
+<div><dt>Paired with engineers</dt><dd>We built new components together inside real feature work, and moved old ones over one at a time.</dd></div>
+<div><dt>Same names</dt><dd>A token or prop in my file had the same name in code, so handoff needed less explaining.</dd></div>
+<div><dt>A page per component</dt><dd>States, props and usage in one place.</dd></div>
+</dl>
+<p class="body" style="margin-top:32px">The result: <b>handoff got faster, with fewer questions</b>, because names and states already matched. New screens were built from the library first, and old screens moved over in phases.</p>
+
+<div class="blk">
+<h3>From idea to release</h3>
+<p class="body">Nothing gets built without a spec and a sign-off. That keeps one-off components out.</p>
+<dl class="rows" style="margin-top:24px">
+<div><dt>1 · Request</dt><dd>A screen needs something the system doesn’t have.</dd></div>
+<div><dt>2 · Spec</dt><dd>States, props, keyboard use and labels, written down.</dd></div>
+<div><dt>3 · Sign-off</dt><dd><b>No spec, no build.</b></dd></div>
+<div><dt>4 · Build and audit</dt><dd>Checked against the spec, in the code itself.</dd></div>
+<div><dt>5 · Release</dt><dd>Its docs page is marked Ready, so everyone knows it’s safe to use.</dd></div>
+</dl>
+</div>
+
+<div class="blk">
+<h3>After handoff: an audit, then fixes in phases</h3>
+<p class="body">Once teams were building with it, I audited the system for version 2. Every finding has the same shape: what’s wrong, the proof from the code, and who it affects. The fixes come after, in phases.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/ds-audit.webp" alt="An audit finding: long forms in a dialog can’t scroll. It affects every form in a dialog, for anyone on a laptop or zoomed in, with proof from the component code and the fix written separately." loading="lazy"></div>
+</figure>
+<dl class="rows" style="margin-top:32px">
+<div><dt>Phase 1 · Safety</dt><dd>Ask before deleting in bulk and a loading state on Button (done), then scrolling dialogs, a skip link, and menus that name their row.</dd></div>
+<div><dt>Phase 2 · Tables</dt><dd>Filter and sort in data tables.</dd></div>
+<div><dt>Phase 3 · Access</dt><dd>Show or hide by role and permission, and calendar scoping.</dd></div>
+</dl>
+</div>
+</section>
+
+<section aria-labelledby="s6">
+<p class="label">Outcome</p>
+<h2 id="s6">The same decision, never made twice</h2>
+<figure>
+<div class="rows tri" role="table" aria-label="Before and with the system, for each group">
+<div class="hd" role="row"><span role="columnheader">Who</span><span role="columnheader">Before</span><span role="columnheader">With the system</span></div>
+<div role="row"><span class="k" role="rowheader">Designers</span><span role="cell" class="muted">Chose colours, sizes and spacing for each screen</span><span role="cell"><b>Start from components</b> and spend the time on the problem</span></div>
+<div role="row"><span class="k" role="rowheader">Engineers</span><span role="cell" class="muted">Rebuilt the same parts, asked about states at every handoff</span><span role="cell"><b>One component, the same props</b> everywhere</span></div>
+<div role="row"><span class="k" role="rowheader">Users</span><span role="cell" class="muted">Different buttons and patterns from page to page</span><span role="cell"><b>The same patterns</b>, with keyboard and screen reader support built in</span></div>
+<div role="row"><span class="k" role="rowheader">Krane</span><span role="cell" class="muted">Brand colour used differently across products</span><span role="cell"><b>One yellow</b>, for the brand and the main action</span></div>
+</div>
+</figure>
+
+<div class="blk">
+<h3>Trade-offs I chose</h3>
+<p class="body">Each choice made the system ship sooner. Each one had a cost, and I accepted it on purpose.</p>
+<figure>
+<div class="rows tri" role="table" aria-label="Trade-offs: what I chose, over what, and the cost">
+<div class="hd" role="row"><span role="columnheader">I chose</span><span role="columnheader">Over</span><span role="columnheader">The cost</span></div>
+<div role="row"><span class="k" role="rowheader" style="color:#0a0a0a">shadcn/ui as the base</span><span role="cell" class="muted">Building every part from scratch</span><span role="cell">Some behaviour follows shadcn’s choices, not ours</span></div>
+<div role="row"><span class="k" role="rowheader" style="color:#0a0a0a">New screens first</span><span role="cell" class="muted">Moving every old screen at once</span><span role="cell">For a while, old and new screens looked different</span></div>
+<div role="row"><span class="k" role="rowheader" style="color:#0a0a0a">Fewer components, every state</span><span role="cell" class="muted">Many components, some half done</span><span role="cell">Teams sometimes waited for a part without a spec</span></div>
+<div role="row"><span class="k" role="rowheader" style="color:#0a0a0a">A page per component</span><span role="cell" class="muted">A full docs site</span><span role="cell">Fewer examples than a full site would have</span></div>
+</div>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="s7">
+<p class="label">Looking back</p>
+<h2 id="s7">What I’d keep, and what I’d change</h2>
+<dl class="rows" style="margin-top:32px">
+<div><dt>What worked</dt><dd>Agree on the names first. Every later decision was easier, because design and code already used the same names.</dd></div>
+<div><dt>I’d change</dt><dd>Start the form specs sooner, alongside the tokens. Forms touch every product.</dd></div>
+<div><dt>Where it is now</dt><dd>Still the base for every new screen. AutoLog and Delivery Board were built with it, and a design partner now leads it.</dd></div>
+</dl>
+</section>
+
+<section aria-label="Next case study" style="padding-top:120px">
+<a class="next" href="/spi/"><span><span class="label" style="display:block">Next case study</span><span class="t">SPI Service app</span><span class="s">SPI Equipments · Mobile app</span></span><span class="a" aria-hidden="true">→</span></a>
+</section>
+</main>
+
+<footer>
+<span>© 2026 Sathish Udhayakumar</span>
+<a href="#top">Back to top <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></a>
+</footer>
+</div>
+<script>
+(function(){var f=document.querySelector('.px-fig');if(!f)return;var b=f.querySelector('.px-fs'),t=f.querySelector('.px-title');
+function set(on){f.classList.toggle('is-full',on);document.documentElement.classList.toggle('px-lock',on);b.setAttribute('aria-pressed',on);t.textContent=on?'AutoLog prototype · made-up data':'AutoLog prototype · made-up data, best on a laptop';if(!on)b.focus()}
+b.addEventListener('click',function(){set(!f.classList.contains('is-full'))});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&f.classList.contains('is-full'))set(false)});
+})();
+</script>
+</body>
+</html>

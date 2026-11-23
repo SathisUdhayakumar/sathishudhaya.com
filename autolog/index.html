@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoLog case study · Sathish Udhayakumar</title>
+<meta name="description" content="An AI tool only the support team could run. I redesigned it so customers run it themselves, and a person checks every AI record. 80+ hours of work down to 4–5.">
+<link rel="canonical" href="https://sathishudhaya.com/autolog/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sathishudhaya.com/autolog/">
+<meta property="og:title" content="AutoLog case study · Sathish Udhayakumar">
+<meta property="og:description" content="An AI tool only the support team could run. I redesigned it so customers run it themselves, and a person checks every AI record. 80+ hours of work down to 4–5.">
+<meta property="og:image" content="https://sathishudhaya.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+/* Same system as Home (G) and Work (F)
+   Column 720 · spacing 8 16 24 32 48 72 120 · type 13 14 16 20 32 56
+   Text #0a0a0a / #5c5c5c · lines #e5e5e5 / #d4d4d4 · surfaces #f5f5f5 / #fafafa · blue #3e6dec for hover, focus, current */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:#fff;color:#0a0a0a;font:400 16px/1.6 'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,ol,figure,dl,dd,blockquote{margin:0;padding:0}
+ul,ol{list-style:none}
+a{color:#0a0a0a}
+a:hover{color:#3e6dec}
+a:focus-visible,button:focus-visible{outline:2px solid #3e6dec;outline-offset:2px;border-radius:2px}
+b,strong{font-weight:600}
+img{display:block;max-width:100%;height:auto}
+
+.col{max-width:768px;margin:0 auto;padding:0 24px}
+.wide{width:min(960px,100vw - 48px);position:relative;left:50%;transform:translateX(-50%)}
+
+/* menu */
+.nav{display:flex;justify-content:center;gap:24px;padding-top:24px;font-size:14px}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 2px;text-decoration:none;color:#5c5c5c}
+.nav a:hover{color:#3e6dec}
+.nav a[aria-current]{color:#0a0a0a;text-decoration:underline wavy #3e6dec 1px;text-underline-offset:6px}
+
+/* type */
+.label{font-size:14px;line-height:1.4;color:#5c5c5c}
+h1{font:600 clamp(40px,7vw,56px)/1.08 'Bricolage Grotesque',sans-serif;letter-spacing:-1.4px}
+h2{font:600 32px/1.2 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
+h3{font:600 20px/1.3 'Bricolage Grotesque',sans-serif;letter-spacing:-.2px}
+.lead{font-size:20px;line-height:1.5;color:#5c5c5c;max-width:640px}
+.body{max-width:640px}
+.body+.body{margin-top:16px}
+.note{font-size:13px;line-height:1.5;color:#5c5c5c}
+.muted{color:#5c5c5c}
+
+/* rhythm */
+header{padding-top:120px}
+header h1{margin-top:16px}
+header .lead{margin-top:32px}
+section{padding-top:120px}
+section>h2{margin-top:16px}
+section>h2+.body,section>h2+.lead{margin-top:16px}
+.blk{margin-top:72px}
+.blk>h3+.body{margin-top:16px}
+.blk>.label+h3{margin-top:8px}
+figure{margin-top:32px}
+figcaption{margin-top:16px;font-size:13px;line-height:1.5;color:#5c5c5c;max-width:640px}
+
+.wide>figcaption{margin-left:max(0px,(100% - 720px)/2)}
+
+/* results: number + what it measures */
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;margin-top:48px}
+.res>div{padding:24px 24px 24px 0}
+.res>div+div{padding-left:24px;border-left:1px solid #e5e5e5}
+.res .n{font:600 32px/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
+.res .l{margin-top:8px;font-size:14px;line-height:1.5;color:#5c5c5c}
+
+/* rows, like Experience on Home */
+.rows{border-bottom:1px solid #e5e5e5}
+.rows>div{display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px solid #e5e5e5;font-size:14px;line-height:1.5}
+.rows dt,.rows .k{color:#5c5c5c}
+.rows.tri>div{grid-template-columns:160px minmax(0,1fr) minmax(0,1fr)}
+.rows .hd{color:#5c5c5c;padding:8px 0}
+.facts{margin-top:48px}
+.facts+.note{margin-top:16px}
+
+/* screens */
+.shot{padding:0}
+.shot img{aspect-ratio:16/10;object-fit:cover;object-position:left top}
+.fitbox{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;border:1px solid #e5e5e5;border-radius:12px;background:#fafafa;box-shadow:0 8px 24px rgba(10,10,10,.06);padding:24px}
+.shot .fitbox img{aspect-ratio:auto;width:auto;height:100%;max-width:100%;border:0;box-shadow:none;background:none}
+.shot img{border-radius:12px;border:1px solid #e5e5e5;width:100%;background:#fff;box-shadow:0 8px 24px rgba(10,10,10,.06)}
+
+.next .s{margin-left:8px;font-size:16px;color:#5c5c5c}
+@media (max-width:600px){.next .s{display:block;margin:4px 0 0}}
+/* quote, like Kind words */
+blockquote{margin-top:32px;border-left:0;font-size:20px;line-height:1.5;max-width:640px}
+blockquote+p{margin-top:8px}
+
+/* prototype */
+.px{border:1px solid #e5e5e5;border-radius:24px;overflow:hidden;background:#f5f5f5}
+.px-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px 12px 24px;font-size:14px;color:#5c5c5c;border-bottom:1px solid #e5e5e5;background:#fafafa}
+.px-bar a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#0a0a0a;text-decoration:none}
+.px-bar a:hover{color:#3e6dec}
+.px-bar button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid #e5e5e5;border-radius:999px;background:#fff;color:#0a0a0a;font:500 14px/1 'DM Sans',sans-serif;cursor:pointer}
+.px-bar button:hover{color:#3e6dec;border-color:#3e6dec}
+.px-key{font-size:12px;color:#5c5c5c;border:1px solid #e5e5e5;border-radius:4px;padding:2px 6px}
+.px-fs-close{display:none;align-items:center;gap:8px}
+.px-fig.is-full{transform:none;left:0;width:auto}
+.px-fig.is-full .px{position:fixed;inset:0;z-index:100;border:0;border-radius:0;display:flex;flex-direction:column}
+.px-fig.is-full .px-stage{aspect-ratio:auto;flex:1}
+.px-fig.is-full .px-stage iframe{display:block}
+.px-fig.is-full .px-poster{display:none}
+.px-fig.is-full .px-fs-open{display:none}
+.px-fig.is-full .px-fs-close{display:inline-flex}
+html.px-lock{overflow:hidden}
+.px-stage{position:relative;aspect-ratio:1440/900;background:#fff}
+.px-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.px-poster{display:none}
+@media (max-width:760px){
+  .px-stage iframe{display:none}
+  .px-poster{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left top}
+}
+
+/* flag reasons */
+.flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:24px}
+.flags li{font-size:14px;line-height:1.5;color:#5c5c5c}
+.flags b{display:block;color:#0a0a0a;font-weight:500}
+
+/* next + footer */
+.next{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:24px 0;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;text-decoration:none;color:#0a0a0a}
+.next .t{font:600 20px/1.3 'Bricolage Grotesque',sans-serif}
+.next:hover .t,.next:hover .a{color:#3e6dec}
+.next .a{font-size:14px;color:#5c5c5c;white-space:nowrap}
+footer{margin-top:48px;padding-bottom:72px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:#5c5c5c}
+footer a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#5c5c5c;text-decoration:none}
+footer a:hover{color:#3e6dec}
+
+@media (max-width:600px){
+  header{padding-top:72px}
+  section{padding-top:72px}
+  .blk{margin-top:48px}
+  h2{font-size:24px;letter-spacing:-.3px}
+  .res>div,.res>div+div{padding:16px 0;border-left:0}
+  .res>div+div{border-top:1px solid #e5e5e5}
+  .rows>div,.rows.tri>div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .rows .hd{display:none!important}
+  .shot img,.fitbox{border-radius:8px}
+  .fitbox{padding:8px}
+  .px{border-radius:16px}
+}
+</style>
+<script>(function(){try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}if(location.hash)return;var t=0,u=false;function top(){if(!u)scrollTo(0,0)}["wheel","touchstart","keydown","mousedown"].forEach(function(n){addEventListener(n,function(){u=true},{passive:true,once:true})});top();addEventListener("DOMContentLoaded",top);addEventListener("load",function(){top();setTimeout(top,150);setTimeout(top,600);setTimeout(top,1200)});addEventListener("pageshow",function(e){if(e.persisted){u=false;top()}})})();</script>
+</head>
+<body>
+<div class="col" id="top">
+
+<nav class="nav" aria-label="Main">
+<a href="/">Home</a>
+<a href="/work/" aria-current="page">Work</a>
+<a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)">Resume</a>
+</nav>
+
+<main>
+<header>
+<p class="label"><span style="color:#0a0a0a">Krane</span> · AI tool · 2026</p>
+<h1>AutoLog: customers now run it themselves</h1>
+<p class="lead">Only our support team could run this AI tool. I redesigned it so customers start a log on their own, and a person checks every AI record before it goes live.</p>
+
+<div class="res" role="list" aria-label="Results">
+<div role="listitem"><p class="n">80+ h → 4–5 h</p><p class="l">to build a log</p></div>
+<div role="listitem"><p class="n">~10×</p><p class="l">weekly customer users after V1.5</p></div>
+</div>
+
+<dl class="rows facts">
+<div><dt>Role</dt><dd>Senior Product Designer, end to end</dd></div>
+<div><dt>Team</dt><dd>PM, project head, engineering, support team</dd></div>
+<div><dt>Shipped</dt><dd>V1.5 in August 2026, V2.0 in late September</dd></div>
+<div><dt>Status</dt><dd><span aria-hidden="true" style="display:inline-block;width:8px;height:8px;border-radius:4px;background:#16a34a;margin-right:8px"></span>V2.0 live, first customer runs in November</dd></div>
+</dl>
+<p class="note">Krane work is under NDA, so all screens use made-up data.</p>
+</header>
+
+<!-- 1 -->
+<section aria-labelledby="s1">
+<p class="label">The problem</p>
+<h2 id="s1">Building a log was slow, manual and hidden</h2>
+<p class="body">AutoLog turns construction specs into procurement and submittal logs: what a project has to buy, and what it has to get approved.</p>
+
+<div class="res" role="list" aria-label="Before AutoLog">
+<div role="listitem"><p class="n">500+</p><p class="l">spec pages per project</p></div>
+<div role="listitem"><p class="n">80+ h</p><p class="l">of manual review per log</p></div>
+<div role="listitem"><p class="n">2–4 weeks</p><p class="l">before a log was ready</p></div>
+</div>
+
+<div class="blk">
+<h3>What was wrong with the first version</h3>
+<p class="body">It needed all three documents before it would start. It forced a rigid five-step flow. And while the AI worked, nobody could see what it was doing.</p>
+<figure>
+<div class="rows tri" role="table" aria-label="Before and after, step by step">
+<div class="hd" role="row"><span role="columnheader">Step</span><span role="columnheader">Before</span><span role="columnheader">After</span></div>
+<div role="row"><span class="k" role="rowheader">Who runs it</span><span role="cell" class="muted">Only the support team</span><span role="cell"><b>Customers, on their own</b></span></div>
+<div role="row"><span class="k" role="rowheader">Add documents</span><span role="cell" class="muted">3 files, all required</span><span role="cell"><b>The spec only</b>, drawings optional</span></div>
+<div role="row"><span class="k" role="rowheader">AI reads</span><span role="cell" class="muted">Wait, no progress shown</span><span role="cell">The AI <b>flags what to check</b></span></div>
+<div role="row"><span class="k" role="rowheader">Check</span><span role="cell" class="muted">No check step</span><span role="cell"><b>Each record beside its source</b></span></div>
+<div role="row"><span class="k" role="rowheader">Result</span><span role="cell" class="muted">A file outside the project</span><span role="cell"><b>Marked ready</b> in the project log</span></div>
+</div>
+</figure>
+</div>
+</section>
+
+<!-- 2 -->
+<section aria-labelledby="s2">
+<p class="label">Research</p>
+<h2 id="s2">What I learned before designing</h2>
+<p class="body">I owned AutoLog end to end: the research, the flow, every screen, the rules for when the AI flags an item, and its prompts with the AI team. Each finding below changed the design.</p>
+
+<figure>
+<div class="rows tri" role="table" aria-label="Research: what I did, what I found, what it led to">
+<div class="hd" role="row"><span role="columnheader">What I did</span><span role="columnheader">What I found</span><span role="columnheader">What it led to</span></div>
+<div role="row"><span class="k" role="rowheader">Talked with 3 project managers</span><span role="cell">They trust an item only when they can see the page it came from.</span><span role="cell"><a href="#d2">Source beside every record</a></span></div>
+<div role="row"><span class="k" role="rowheader">Watched our support team run it</span><span role="cell">Only they could run it, and nobody could trace a result to the spec.</span><span role="cell">Customers run it themselves</span></div>
+<div role="row"><span class="k" role="rowheader">Read real project specs</span><span role="cell">People read specs by division and section.</span><span role="cell"><a href="#d3">Review follows the spec</a></span></div>
+<div role="row"><span class="k" role="rowheader">Looked at other tools</span><span role="cell">Chat tools return one long reply. Others make you link items by hand.</span><span role="cell"><a href="#d1">Clear steps, chat on the side</a></span></div>
+<div role="row"><span class="k" role="rowheader">Tested prototypes</span><span role="cell">People missed a separate confirm step when linking.</span><span role="cell"><a href="#d4">One Confirm links button</a></span></div>
+</div>
+</figure>
+
+<blockquote>“They didn’t trust a list unless they could see the page each item came from.”</blockquote>
+<p class="note">What I heard from project managers. One wrong grade can mean ordering the wrong steel.</p>
+
+<div class="blk">
+<h3>Two rules we set early</h3>
+<p class="body">With the PM, we agreed that <b>customers run it, not our support team</b>, and that <b>nothing goes live without a person</b>. We shipped in two steps, V1.5 then V2.0, and left automatic approval out of the first release on purpose.</p>
+</div>
+</section>
+
+<!-- try it -->
+<section aria-labelledby="s3">
+<p class="label">Try it</p>
+<h2 id="s3">A working prototype, not a video</h2>
+<p class="body">Add files, ask KAI, check results and move them to Materials. It uses a small sample project, so you can finish in about two minutes.</p>
+<figure class="wide px-fig">
+<div class="px">
+<div class="px-bar"><span class="px-title">AutoLog prototype · made-up data, best on a laptop</span><button type="button" class="px-fs" aria-pressed="false"><span class="px-fs-open">Full screen <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></span><span class="px-fs-close">Close <span class="px-key">Esc</span></span></button></div>
+<div class="px-stage">
+<iframe src="proto/app.html" title="AutoLog prototype" loading="lazy"></iframe>
+<img class="px-poster" src="proto/Check.webp" alt="AutoLog check screen. Tap Full screen to try the prototype.">
+</div>
+</div>
+</figure>
+</section>
+
+<!-- 3 -->
+<section aria-labelledby="s4">
+<p class="label">Key decisions</p>
+<h2 id="s4">Keeping a person in charge of the AI</h2>
+<p class="body">Four decisions shaped the design. Each one kept a person in charge, and each had a cost.</p>
+
+<div class="blk" id="d1">
+<p class="label">Decision 1</p>
+<h3>Clear steps, with chat on the side</h3>
+<p class="body">Some of the team wanted AutoLog to work like a chat. I built both and showed them side by side. We chose clear steps: <b>buttons appear only when you need to decide</b>, and chat is for questions. A chat gives one long reply that’s hard to check.</p>
+<p class="body muted">Trade-off: less freedom, but results you can predict. Shipped in V1.5.</p>
+<figure class="wide">
+<div class="shot"><img src="img/al-s-setup.webp" alt="AutoLog setup step: KAI asks three questions with choices before it builds the logs, with a chat box below and a list of what it found." loading="lazy"></div>
+<figcaption>Before it builds the logs, KAI asks three questions with choices. Chat stays below for anything else.</figcaption>
+</figure>
+</div>
+
+<div class="blk" id="d2">
+<p class="label">Decision 2</p>
+<h3>Nothing goes live without a person</h3>
+<p class="body">Every record opens <b>beside the passage it came from</b> and stays a draft until someone marks it ready. Ask KAI about a flagged record and it answers with choices, not a prompt to write.</p>
+<p class="body muted">Trade-off: one more step before anything goes live.</p>
+<figure class="wide">
+<div class="shot"><img src="proto/Check.webp" alt="A flagged record, Anchor rods, open beside the spec page it came from, with grade choices, a KAI answer and a Mark ready button." loading="lazy"></div>
+<figcaption>A flagged record next to its source page, with choices to fix it.</figcaption>
+</figure>
+<p class="body" style="margin-top:32px">I wrote the rules for when the AI flags an item instead of guessing. Each flag has <b>one clear reason</b>, so a person knows exactly what to check.</p>
+<ul class="flags" aria-label="Flag reasons">
+<li><b>Low confidence</b>It isn’t sure it read the item right.</li>
+<li><b>Two values</b>Grade 36 in one place, 55 in another.</li>
+<li><b>Missing detail</b>The item has no grade or description.</li>
+<li><b>Unreadable page</b>The page is a scan with no text.</li>
+</ul>
+<p class="note" style="margin-top:24px">Each week, the AI team and I reviewed the results and turned wrong answers into new rules.</p>
+</div>
+
+<div class="blk" id="d3">
+<p class="label">Decision 3</p>
+<h3>Review follows the spec</h3>
+<p class="body">Records sit under their division and section, the order people already read in, so <b>gaps show up fast</b>. A whole section can be marked ready at once. Flagged records still need a person.</p>
+<p class="body muted">Trade-off: deeper navigation than a flat list.</p>
+<figure class="wide">
+<div class="shot"><img src="img/al-s-results.webp" alt="AutoLog run results grouped by spec section, with a confidence bar, a flag reason and a status for each record." loading="lazy"></div>
+<figcaption>Results grouped by division, section and subsection.</figcaption>
+</figure>
+</div>
+
+<div class="blk" id="d4">
+<p class="label">Decision 4</p>
+<h3>Items connect themselves</h3>
+<p class="body">Linking used to be manual. AutoLog knows the section and page of every material, so it <b>suggests the links</b> to submittals and schedule activities. I tested three ways to confirm them. People missed a separate confirm step, so we shipped <b>one Confirm links button</b>, and every link can be undone.</p>
+<p class="body muted">Trade-off: the AI only suggests. A person still confirms each link.</p>
+<figure class="wide">
+<div class="shot"><img src="img/al-s-links.webp" alt="Submittals log with links suggested by AutoLog, and one submittal linked to its material and schedule activity, each link with Undo." loading="lazy"></div>
+<figcaption>Suggested links, confirmed with one button.</figcaption>
+</figure>
+</div>
+
+<div class="blk">
+<p class="label">Proposal, not shipped yet</p>
+<h3>When the AI can’t read a page</h3>
+<p class="body">Some pages are scans with no text. Instead of skipping them quietly, KAI <b>says which pages it couldn’t read</b> and offers two ways forward.</p>
+<figure class="wide">
+<div class="shot"><div class="fitbox"><img src="img/al-4-unreadable.webp" alt="KAI says it could not read six scanned pages and offers two ways forward: read the scans, or add the items by hand." loading="lazy"></div></div>
+</figure>
+</div>
+</section>
+
+<!-- 4 -->
+<section aria-labelledby="s5">
+<p class="label">Outcome</p>
+<h2 id="s5">Hours instead of weeks, run by customers</h2>
+
+<div class="res" role="list" aria-label="Results">
+<div role="listitem"><p class="n">80+ h → 4–5 h</p><p class="l">to build a log, in the first customer runs (November 2026). A person still checked every result.</p></div>
+<div role="listitem"><p class="n">~10×</p><p class="l">weekly customer users, 6 weeks after V1.5 vs the 8 weeks before. The rise followed V1.5, but that doesn’t prove it was the only cause.</p></div>
+</div>
+<p class="body" style="margin-top:32px">I count weekly customer users, people outside Krane, because total visits include our own testing. V2.0 went live in late September, and the first customer runs in November got positive feedback.</p>
+</section>
+
+<!-- 5 -->
+<section aria-labelledby="s6">
+<p class="label">Looking back</p>
+<h2 id="s6">What I’d do next</h2>
+<dl class="rows" style="margin-top:32px">
+<div><dt>I’d change</dt><dd>Put it in front of customers sooner. Earlier runs would have shown how long a full run really takes.</dd></div>
+<div><dt>I’d test next</dt><dd>Do people trust the step from draft to ready?</dd></div>
+<div><dt>Left out on purpose</dt><dd>Fully automatic approval, and duplicate detection and merging. Less automation, so people stay in charge. Confidence scores and AI-suggested activity links came in V2.0.</dd></div>
+</dl>
+</section>
+
+<section aria-label="Next case study" style="padding-top:120px">
+<a class="next" href="/delivery-board/"><span><span class="label" style="display:block">Next case study</span><span class="t">Delivery Board</span><span class="s">Every delivery, every material</span></span><span class="a" aria-hidden="true">→</span></a>
+</section>
+</main>
+
+<footer>
+<span>© 2026 Sathish Udhayakumar</span>
+<a href="#top">Back to top <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></a>
+</footer>
+</div>
+<script>
+(function(){var f=document.querySelector('.px-fig');if(!f)return;var b=f.querySelector('.px-fs'),t=f.querySelector('.px-title');
+function set(on){f.classList.toggle('is-full',on);document.documentElement.classList.toggle('px-lock',on);b.setAttribute('aria-pressed',on);t.textContent=on?'AutoLog prototype · made-up data':'AutoLog prototype · made-up data, best on a laptop';if(!on)b.focus()}
+b.addEventListener('click',function(){set(!f.classList.contains('is-full'))});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&f.classList.contains('is-full'))set(false)});
+})();
+</script>
+</body>
+</html>

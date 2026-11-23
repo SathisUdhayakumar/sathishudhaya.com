@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delivery Board case study · Sathish Udhayakumar</title>
+<meta name="description" content="Two pages for the same deliveries became one board, with every delivery linked to its materials. 9 in 10 delivery visits moved to the new board within four weeks.">
+<link rel="canonical" href="https://sathishudhaya.com/delivery-board/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sathishudhaya.com/delivery-board/">
+<meta property="og:title" content="Delivery Board case study · Sathish Udhayakumar">
+<meta property="og:description" content="Two pages for the same deliveries became one board, with every delivery linked to its materials. 9 in 10 delivery visits moved to the new board within four weeks.">
+<meta property="og:image" content="https://sathishudhaya.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+/* Same system as Home (G) and Work (F)
+   Column 720 · spacing 8 16 24 32 48 72 120 · type 13 14 16 20 32 56
+   Text #0a0a0a / #5c5c5c · lines #e5e5e5 / #d4d4d4 · surfaces #f5f5f5 / #fafafa · blue #3e6dec for hover, focus, current */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:#fff;color:#0a0a0a;font:400 16px/1.6 'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,ol,figure,dl,dd,blockquote{margin:0;padding:0}
+ul,ol{list-style:none}
+a{color:#0a0a0a}
+a:hover{color:#3e6dec}
+a:focus-visible,button:focus-visible{outline:2px solid #3e6dec;outline-offset:2px;border-radius:2px}
+b,strong{font-weight:600}
+img{display:block;max-width:100%;height:auto}
+
+.col{max-width:768px;margin:0 auto;padding:0 24px}
+.wide{width:min(960px,100vw - 48px);position:relative;left:50%;transform:translateX(-50%)}
+
+/* menu */
+.nav{display:flex;justify-content:center;gap:24px;padding-top:24px;font-size:14px}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 2px;text-decoration:none;color:#5c5c5c}
+.nav a:hover{color:#3e6dec}
+.nav a[aria-current]{color:#0a0a0a;text-decoration:underline wavy #3e6dec 1px;text-underline-offset:6px}
+
+/* type */
+.label{font-size:14px;line-height:1.4;color:#5c5c5c}
+h1{font:600 clamp(40px,7vw,56px)/1.08 'Bricolage Grotesque',sans-serif;letter-spacing:-1.4px}
+h2{font:600 32px/1.2 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
+h3{font:600 20px/1.3 'Bricolage Grotesque',sans-serif;letter-spacing:-.2px}
+.lead{font-size:20px;line-height:1.5;color:#5c5c5c;max-width:640px}
+.body{max-width:640px}
+.body+.body{margin-top:16px}
+.note{font-size:13px;line-height:1.5;color:#5c5c5c}
+.muted{color:#5c5c5c}
+
+/* rhythm */
+header{padding-top:120px}
+header h1{margin-top:16px}
+header .lead{margin-top:32px}
+section{padding-top:120px}
+section>h2{margin-top:16px}
+section>h2+.body,section>h2+.lead{margin-top:16px}
+.blk{margin-top:72px}
+.blk>h3+.body{margin-top:16px}
+.blk>.label+h3{margin-top:8px}
+figure{margin-top:32px}
+figcaption{margin-top:16px;font-size:13px;line-height:1.5;color:#5c5c5c;max-width:640px}
+
+.wide>figcaption{margin-left:max(0px,(100% - 720px)/2)}
+
+/* results: number + what it measures */
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;margin-top:48px}
+.res>div{padding:24px 24px 24px 0}
+.res>div+div{padding-left:24px;border-left:1px solid #e5e5e5}
+.res .n{font:600 32px/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
+.res .l{margin-top:8px;font-size:14px;line-height:1.5;color:#5c5c5c}
+
+/* rows, like Experience on Home */
+.rows{border-bottom:1px solid #e5e5e5}
+.rows>div{display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px solid #e5e5e5;font-size:14px;line-height:1.5}
+.rows dt,.rows .k{color:#5c5c5c}
+.rows.tri>div{grid-template-columns:160px minmax(0,1fr) minmax(0,1fr)}
+.rows .hd{color:#5c5c5c;padding:8px 0}
+.facts{margin-top:48px}
+.facts+.note{margin-top:16px}
+
+/* screens */
+.shot{padding:0}
+.shot img{aspect-ratio:16/10;object-fit:cover;object-position:left top}
+.fitbox{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;border:1px solid #e5e5e5;border-radius:12px;background:#fafafa;box-shadow:0 8px 24px rgba(10,10,10,.06);padding:24px}
+.shot .fitbox img{aspect-ratio:auto;width:auto;height:100%;max-width:100%;border:0;box-shadow:none;background:none}
+.shot img{border-radius:12px;border:1px solid #e5e5e5;width:100%;background:#fff;box-shadow:0 8px 24px rgba(10,10,10,.06)}
+
+.shot.free img{aspect-ratio:auto;object-fit:initial}
+/* phone screens, straight on white */
+.phones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.phones.two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:648px;margin:0 auto}
+.phones.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.phones img{width:100%;aspect-ratio:390/844;object-fit:cover;object-position:top;border:1px solid #e5e5e5;border-radius:32px;box-shadow:0 8px 24px rgba(10,10,10,.06);background:#f3f4f6}
+.phones.four img{border-radius:24px}
+.phones p{margin-top:16px;font-size:13px;line-height:1.5;color:#5c5c5c}
+.phones p b{color:#0a0a0a;font-weight:500}
+@media (max-width:600px){
+  .phones,.phones.two,.phones.four{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;max-width:none;margin:0 -24px;padding:0 24px 8px;scroll-padding:0 24px}
+  .phones>div{flex:0 0 68%;scroll-snap-align:start}
+  .phones img,.phones.four img{border-radius:24px}
+}
+
+.phones.pair{grid-template-columns:2.73fr 1fr;align-items:start}
+.phones.pair img{aspect-ratio:auto;object-fit:initial}
+.phones.pair .pc img{border-radius:12px}
+.tablets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.tablets img{width:100%;border:1px solid #e5e5e5;border-radius:16px;box-shadow:0 8px 24px rgba(10,10,10,.06);background:#fff}
+.tablets p{margin-top:16px;font-size:13px;line-height:1.5;color:#5c5c5c}
+.px-steps{display:flex;justify-content:space-between;gap:0;padding:8px 8px;border-bottom:1px solid #e5e5e5;background:#fff;overflow-x:auto}
+.px-steps button{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 8px;border:0;border-radius:999px;background:none;font:500 13px/1 'DM Sans',sans-serif;color:#5c5c5c;white-space:nowrap;cursor:pointer}
+.px-steps button span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:10px;border:1px solid #d4d4d4;font-size:11px;font-variant-numeric:tabular-nums}
+.px-steps button:hover{color:#3e6dec}
+.px-steps li.on button{background:#f5f5f5;color:#0a0a0a}
+.px-steps li.on button span{background:#0a0a0a;border-color:#0a0a0a;color:#fff}
+.px-steps li.dn button span{background:#f5f5f5}
+@media (max-width:760px){.px-steps{display:none}.px-fig.is-full .px-steps{display:flex}}
+@media (max-width:600px){
+  .phones.pair{display:grid;grid-template-columns:2.73fr 1fr;gap:12px;margin:0;padding:0;overflow:visible}
+  .tablets{grid-template-columns:minmax(0,1fr);gap:16px}
+}
+
+.next .s{margin-left:8px;font-size:16px;color:#5c5c5c}
+@media (max-width:600px){.next .s{display:block;margin:4px 0 0}}
+/* quote, like Kind words */
+blockquote{margin-top:32px;border-left:0;font-size:20px;line-height:1.5;max-width:640px}
+blockquote+p{margin-top:8px}
+
+/* prototype */
+.px{border:1px solid #e5e5e5;border-radius:24px;overflow:hidden;background:#f5f5f5}
+.px-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px 12px 24px;font-size:14px;color:#5c5c5c;border-bottom:1px solid #e5e5e5;background:#fafafa}
+.px-bar a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#0a0a0a;text-decoration:none}
+.px-bar a:hover{color:#3e6dec}
+.px-bar button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid #e5e5e5;border-radius:999px;background:#fff;color:#0a0a0a;font:500 14px/1 'DM Sans',sans-serif;cursor:pointer}
+.px-bar button:hover{color:#3e6dec;border-color:#3e6dec}
+.px-key{font-size:12px;color:#5c5c5c;border:1px solid #e5e5e5;border-radius:4px;padding:2px 6px}
+.px-fs-close{display:none;align-items:center;gap:8px}
+.px-fig.is-full{transform:none;left:0;width:auto}
+.px-fig.is-full .px{position:fixed;inset:0;z-index:100;border:0;border-radius:0;display:flex;flex-direction:column}
+.px-fig.is-full .px-stage{aspect-ratio:auto;flex:1}
+.px-fig.is-full .px-stage iframe{display:block}
+.px-fig.is-full .px-poster{display:none}
+.px-fig.is-full .px-fs-open{display:none}
+.px-fig.is-full .px-fs-close{display:inline-flex}
+html.px-lock{overflow:hidden}
+.px-stage{position:relative;aspect-ratio:1440/900;background:#fff}
+.px-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.px-poster{display:none}
+@media (max-width:760px){
+  .px-stage iframe{display:none}
+  .px-poster{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left top}
+}
+
+/* flag reasons */
+.flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:24px}
+.flags li{font-size:14px;line-height:1.5;color:#5c5c5c}
+.flags b{display:block;color:#0a0a0a;font-weight:500}
+
+/* next + footer */
+.next{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:24px 0;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;text-decoration:none;color:#0a0a0a}
+.next .t{font:600 20px/1.3 'Bricolage Grotesque',sans-serif}
+.next:hover .t,.next:hover .a{color:#3e6dec}
+.next .a{font-size:14px;color:#5c5c5c;white-space:nowrap}
+footer{margin-top:48px;padding-bottom:72px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:#5c5c5c}
+footer a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#5c5c5c;text-decoration:none}
+footer a:hover{color:#3e6dec}
+
+@media (max-width:600px){
+  header{padding-top:72px}
+  section{padding-top:72px}
+  .blk{margin-top:48px}
+  h2{font-size:24px;letter-spacing:-.3px}
+  .res>div,.res>div+div{padding:16px 0;border-left:0}
+  .res>div+div{border-top:1px solid #e5e5e5}
+  .rows>div,.rows.tri>div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .rows .hd{display:none!important}
+  .shot img,.fitbox{border-radius:8px}
+  .fitbox{padding:8px}
+  .px{border-radius:16px}
+}
+</style>
+<script>(function(){try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}if(location.hash)return;var t=0,u=false;function top(){if(!u)scrollTo(0,0)}["wheel","touchstart","keydown","mousedown"].forEach(function(n){addEventListener(n,function(){u=true},{passive:true,once:true})});top();addEventListener("DOMContentLoaded",top);addEventListener("load",function(){top();setTimeout(top,150);setTimeout(top,600);setTimeout(top,1200)});addEventListener("pageshow",function(e){if(e.persisted){u=false;top()}})})();</script>
+</head>
+<body>
+<div class="col" id="top">
+
+<nav class="nav" aria-label="Main">
+<a href="/">Home</a>
+<a href="/work/" aria-current="page">Work</a>
+<a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)">Resume</a>
+</nav>
+
+<main>
+<header>
+<p class="label"><span style="color:#0a0a0a">Krane</span> · Dashboard · 2026</p>
+<h1>Delivery Board: every delivery, every material</h1>
+<p class="lead">Site teams used two pages for the same deliveries, and neither showed what a delivery carried. I put them on one page and linked every delivery to its materials.</p>
+
+<div class="res" role="list" aria-label="Results">
+<div role="listitem"><p class="n">9 in 10</p><p class="l">delivery visits on the new board, from week four</p></div>
+<div role="listitem"><p class="n">2 → 1</p><p class="l">delivery pages, with no drop in weekly customer users</p></div>
+</div>
+
+<dl class="rows facts">
+<div><dt>Role</dt><dd>Senior Product Designer, start to finish</dd></div>
+<div><dt>Team</dt><dd>PM, engineers, support team, construction experts</dd></div>
+<div><dt>Timeline</dt><dd>August to October 2026</dd></div>
+<div><dt>Status</dt><dd><span aria-hidden="true" style="display:inline-block;width:8px;height:8px;border-radius:4px;background:#16a34a;margin-right:8px"></span>Shipped, two follow-ups designed and in build</dd></div>
+</dl>
+<p class="note">Krane work is under NDA, so all screens use made-up data.</p>
+</header>
+
+<section aria-labelledby="s1">
+<p class="label">The problem</p>
+<h2 id="s1">Two pages for one job, and no link to materials</h2>
+<p class="body">Site teams switched between a Calendar page and a List page to manage the same deliveries. What a delivery carried was typed as free text, so nobody could say for sure if a material was planned, partly delivered or fully received.</p>
+
+<div class="res" role="list" aria-label="Before the board">
+<div role="listitem"><p class="n">2</p><p class="l">pages for the same deliveries</p></div>
+<div role="listitem"><p class="n">1 in 7</p><p class="l">delivery visits went to the separate list</p></div>
+<div role="listitem"><p class="n">Free text</p><p class="l">for what a delivery carried, with status updated by hand</p></div>
+</div>
+
+<div class="blk">
+<h3>What free text couldn’t answer</h3>
+<p class="body">Three everyday questions people had to work out by hand.</p>
+<figure>
+<div class="rows tri" role="table" aria-label="Three questions, before and now">
+<div class="hd" role="row"><span role="columnheader">Question</span><span role="columnheader">Before</span><span role="columnheader">Now</span></div>
+<div role="row"><span class="k" role="rowheader">Has it arrived?</span><span role="cell" class="muted">Worked out by hand</span><span role="cell"><b>Confirmed at the gate</b></span></div>
+<div role="row"><span class="k" role="rowheader">What’s still to come?</span><span role="cell" class="muted">Not recorded</span><span role="cell">Marked <b>“More to come”</b></span></div>
+<div role="row"><span class="k" role="rowheader">Which deliveries carry this material?</span><span role="cell" class="muted">No link</span><span role="cell"><b>Shown on every material</b></span></div>
+</div>
+</figure>
+</div>
+
+<div class="blk">
+<h3>One board instead of two pages</h3>
+<p class="body">Calendar and List now share <b>one page, one set of filters and one Create button</b>, and each delivery shows the materials it carries.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/db-one-board.webp" alt="Before: two pages, Calendar and List, each with its own Create button and filters, and a delivery typed as free text. After: one Delivery Board. 1 Views: two separate pages became Calendar and List on one page. 2 Create: two Create buttons became one. 3 Filters: set on one page and lost on the other became one set, kept when you switch. 4 Materials: typed as free text became shown on every delivery." loading="lazy"></div>
+</figure>
+</div>
+
+<div class="blk">
+<h3>From typing to confirming</h3>
+<p class="body">The same three questions, answered in a different way.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/db-typing-confirming.webp" alt="Before and after for three things. Where you plan: two pages with two sets of filters became one board, Calendar or List. What it carries: free text with no link to materials became linked materials from the materials log. Status: typed by hand and going out of date became worked out from what was confirmed." loading="lazy"></div>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="s2">
+<p class="label">Research</p>
+<h2 id="s2">What I learned before designing</h2>
+<p class="body">I studied how teams work, then designed the page structure, delivery flows and material status, and handed the designs to engineers. The PM owned the requirements and the launch.</p>
+<figure>
+<div class="rows tri" role="table" aria-label="Research: what I did, what I found, what it led to">
+<div class="hd" role="row"><span role="columnheader">What I did</span><span role="columnheader">What I found</span><span role="columnheader">What it led to</span></div>
+<div role="row"><span class="k" role="rowheader">Talked with site teams and project managers</span><span role="cell">Only the main contractor running the site knows what actually came in.</span><span role="cell"><a href="#d2">Only the main contractor confirms</a></span></div>
+<div role="row"><span class="k" role="rowheader">Went through support team feedback</span><span role="cell">Delivery contents lived in free text, so nobody could say for sure if a material had arrived.</span><span role="cell"><a href="#d3">Status worked out</a>, <a href="#d4">material by material</a></span></div>
+<div role="row"><span class="k" role="rowheader">Looked at usage data</span><span role="cell">1 in 7 delivery visits went to the separate list. People really used both pages.</span><span role="cell"><a href="#d1">One page, two views</a></span></div>
+</div>
+</figure>
+
+<div class="blk">
+<h3>Three people touch every delivery</h3>
+<p class="body">Each one gets only the actions that are theirs. That is what makes the status <b>trustworthy</b>.</p>
+<dl class="rows" style="margin-top:24px">
+<div><dt>Project team</dt><dd>Sees every delivery for the week, and every material on its way. <span class="muted">Calendar, List, Materials</span></dd></div>
+<div><dt>Supplier</dt><dd>Plans what each truck carries, and marks what is still to come. <span class="muted">Create, More to come</span></dd></div>
+<div><dt>Main contractor</dt><dd>Confirms what actually arrived, at the gate. <b>Only they can.</b> <span class="muted">Confirm arrival</span></dd></div>
+</dl>
+</div>
+</section>
+
+<section aria-labelledby="s3">
+<p class="label">Key decisions</p>
+<h2 id="s3">Linking every delivery to its materials</h2>
+<p class="body">Four decisions shaped the board. Each one made the status easier to trust, and each had a cost.</p>
+
+<div class="blk" id="d1">
+<p class="label">Decision 1</p>
+<h3>One page, two views</h3>
+<p class="body">Calendar and List showed the same deliveries on two pages. They now share <b>one page, one set of filters and one Create button</b>.</p>
+<p class="body muted">Trade-off: the new board had to do everything the old list did before we could remove it.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/db-calendar.webp" alt="Calendar view: deliveries for the week of January 12, placed at their times and tinted by status." loading="lazy"></div>
+</figure>
+<figure class="wide">
+<div class="shot free"><img src="img/db-list.webp" alt="List view of the same deliveries, with Steel package 2 opened to show each material and whether it arrived." loading="lazy"></div>
+<figcaption>Calendar and List show the same deliveries, with one set of filters and one Create button.</figcaption>
+</figure>
+</div>
+
+<div class="blk" id="d2">
+<p class="label">Decision 2</p>
+<h3>Keep what was planned apart from what arrived</h3>
+<p class="body">Anyone who creates a delivery can mark <b>“More to come”</b> for each material. But <b>only the main contractor running the site can confirm what really arrived</b>, because only they know what came in.</p>
+<p class="body muted">Trade-off: one more step for the person receiving the delivery.</p>
+<figure class="wide">
+<div class="phones pair">
+<div class="pc"><img src="img/db-create.webp" alt="Create delivery form. HSS columns is ticked More to come. It stays Planned until the main contractor confirms." loading="lazy"><p>Planning: tick “More to come”</p></div>
+<div><img src="img/db-ph-confirm.webp" alt="Confirm arrival on a phone at the gate: HSS columns arrived, shear studs not today. Status after you confirm: Partly received." loading="lazy"><p>At the gate: confirm what arrived</p></div>
+</div>
+</figure>
+<figure class="wide">
+<div class="shot free"><img src="img/db-supplier.webp" alt="The supplier’s view of Steel package 2: a note says it is waiting for Harbor Builders, the main contractor. The supplier can mark more to come or edit the plan." loading="lazy"></div>
+<figcaption>The supplier sees it’s waiting for the main contractor, and can still edit the plan.</figcaption>
+</figure>
+</div>
+
+<div class="blk" id="d3">
+<p class="label">Decision 3</p>
+<h3>Status is worked out, never typed</h3>
+<p class="body">Planned, Partly received and Received <b>come from what people confirmed</b>. A status people type goes out of date. A worked-out one can’t.</p>
+<p class="body muted">Trade-off: no way to change it by hand, and counting quantities comes later.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/db-detail.webp" alt="Steel package 2 details: worked out from what was confirmed, 2 of 3 materials arrived, so it reads Partly received." loading="lazy"></div>
+<figcaption>2 of 3 materials arrived, so it reads Partly received.</figcaption>
+</figure>
+</div>
+
+<div class="blk" id="d4">
+<p class="label">Decision 4</p>
+<h3>Every material shows the deliveries that carry it</h3>
+<p class="body">Open a material and see <b>each delivery it comes on</b>, what’s still to come, and its submittal.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/db-material.webp" alt="HSS columns, 8×8: the two deliveries that carry it in date order, what is confirmed on site, and links to its submittal and schedule activity." loading="lazy"></div>
+<figcaption>One material, the two deliveries that carry it, and its linked submittal and schedule.</figcaption>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="s4">
+<p class="label">Try it</p>
+<h2 id="s4">A working prototype, built from the real screens</h2>
+<p class="body">Plan a delivery, confirm it at the gate, and watch the status work itself out. It takes about two minutes.</p>
+<figure class="wide px-fig">
+<div class="px">
+<div class="px-bar"><span class="px-title">Delivery Board prototype · made-up data, best on a laptop</span><button type="button" class="px-fs" aria-pressed="false"><span class="px-fs-open">Full screen <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></span><span class="px-fs-close">Close <span class="px-key">Esc</span></span></button></div>
+<ol class="px-steps" aria-label="Prototype steps">
+<li><button type="button" data-s="0"><span>1</span>See the week</button></li>
+<li><button type="button" data-s="1"><span>2</span>Plan a delivery</button></li>
+<li><button type="button" data-s="2"><span>3</span>The supplier’s side</button></li>
+<li><button type="button" data-s="3"><span>4</span>Confirm at the gate</button></li>
+<li><button type="button" data-s="4"><span>5</span>Status works itself out</button></li>
+<li><button type="button" data-s="5"><span>6</span>Follow a material</button></li>
+</ol>
+<div class="px-stage">
+<iframe src="proto/app.html" title="Delivery Board prototype" loading="lazy"></iframe>
+<img class="px-poster" src="proto/Main.webp" alt="Delivery Board calendar. Tap Full screen to try the prototype.">
+</div>
+</div>
+</figure>
+</section>
+
+<section aria-labelledby="s5">
+<p class="label">On site</p>
+<h2 id="s5">Desk, site office and gate</h2>
+<p class="body">The same board on a phone at the gate, an iPad in the site office and a laptop at the desk.</p>
+<figure class="wide">
+<div class="phones four">
+<div><img src="img/db-ph-board.webp" alt="Phone: today’s deliveries on a timeline." loading="lazy"><p>Today’s deliveries</p></div>
+<div><img src="img/db-ph-detail.webp" alt="Phone: Steel package 2 with each material’s status." loading="lazy"><p>A delivery and its materials</p></div>
+<div><img src="img/db-ph-create.webp" alt="Phone: new delivery with More to come." loading="lazy"><p>New delivery</p></div>
+<div><img src="img/db-ph-confirm.webp" alt="Phone: confirm what arrived at the gate." loading="lazy"><p>Confirm at the gate</p></div>
+</div>
+</figure>
+<figure class="wide">
+<div class="tablets">
+<div><img src="img/db-ipad-board.webp" alt="iPad: the week view in the site office." loading="lazy"><p>iPad · the week</p></div>
+<div><img src="img/db-ipad-split.webp" alt="iPad: list and details side by side." loading="lazy"><p>iPad · list and details</p></div>
+<div><img src="img/db-ipad-confirm.webp" alt="iPad: confirm at the gate." loading="lazy"><p>iPad · confirm at the gate</p></div>
+</div>
+</figure>
+</section>
+
+<section aria-labelledby="s6">
+<p class="label">Outcome</p>
+<h2 id="s6">Within four weeks, people moved to the new board</h2>
+<div class="res" role="list" aria-label="Results">
+<div role="listitem"><p class="n">9 in 10</p><p class="l">delivery visits on the new board from the fourth week. In the first three weeks it was about 8 in 10.</p></div>
+<div role="listitem"><p class="n">2 → 1</p><p class="l">Calendar and List became one board. Weekly customer users stayed steady during the switch.</p></div>
+</div>
+<p class="note" style="margin-top:16px">From product analytics. About 9 in 10 delivery visits come from customers, not Krane’s team (90 days to late October 2026).</p>
+
+<div class="blk">
+<h3>Shipped in two steps</h3>
+<dl class="rows" style="margin-top:24px">
+<div><dt>August 2026</dt><dd>Work starts: page structure, delivery flows, material status.</dd></div>
+<div><dt>September 2026</dt><dd><b>Materials linked.</b> Each delivery carries materials from the log.</dd></div>
+<div><dt>October 2026</dt><dd><b>Confirm on arrival.</b> Status works itself out.</dd></div>
+</dl>
+</div>
+
+<div class="blk">
+<p class="label">Designed, in build</p>
+<h3>Two requests after launch</h3>
+<dl class="rows" style="margin-top:24px">
+<div><dt>Drop-off colours</dt><dd>Eight colours that read on a site TV and never look like the red, green or amber of a status. Points with the same name share a colour, so <b>the busiest project’s 10 points need only 7</b>.</dd></div>
+<div><dt>Equipment icons</dt><dd>Crane and forklift icons sit before the company name; placed before the time, they cut it off. <b>3 in 5 crane deliveries</b> used mobile or rough-terrain cranes, so the first version has three types.</dd></div>
+</dl>
+</div>
+
+<div class="blk">
+<h3>Trade-offs I chose</h3>
+<figure>
+<div class="rows tri" role="table" aria-label="Trade-offs: what I chose, over what, and the cost">
+<div class="hd" role="row"><span role="columnheader">I chose</span><span role="columnheader">Over</span><span role="columnheader">The cost</span></div>
+<div role="row"><span class="k" role="rowheader" style="color:#0a0a0a">One page, two views</span><span role="cell" class="muted">Two separate pages</span><span role="cell">The board had to match the old list before we removed it</span></div>
+<div role="row"><span class="k" role="rowheader" style="color:#0a0a0a">Only the main contractor confirms</span><span role="cell" class="muted">Anyone can mark it arrived</span><span role="cell">One more step at the gate</span></div>
+<div role="row"><span class="k" role="rowheader" style="color:#0a0a0a">Status worked out</span><span role="cell" class="muted">A status people type</span><span role="cell">No manual override; quantities come later</span></div>
+</div>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="s7">
+<p class="label">Looking back</p>
+<h2 id="s7">What I’d do next</h2>
+<dl class="rows" style="margin-top:32px">
+<div><dt>I’d change</dt><dd>Agree when the old pages close, before launch. For the first three weeks, about 2 in 10 delivery visits still went to the old pages.</dd></div>
+<div><dt>I’d test next</dt><dd>Do people trust a status they no longer type? And do they understand the difference between a planned delivery and a confirmed one?</dd></div>
+<div><dt>Left out on purpose</dt><dd>Adding materials from a delivery, counting quantities, and tracking the truck.</dd></div>
+</dl>
+</section>
+
+<section aria-label="Next case study" style="padding-top:120px">
+<a class="next" href="/design-system/"><span><span class="label" style="display:block">Next case study</span><span class="t">Krane Design System</span><span class="s">Tokens, components and docs</span></span><span class="a" aria-hidden="true">→</span></a>
+</section>
+</main>
+
+<footer>
+<span>© 2026 Sathish Udhayakumar</span>
+<a href="#top">Back to top <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></a>
+</footer>
+</div>
+<script>
+(function(){var f=document.querySelector('.px-fig');if(!f)return;var b=f.querySelector('.px-fs'),t=f.querySelector('.px-title');
+function set(on){f.classList.toggle('is-full',on);document.documentElement.classList.toggle('px-lock',on);b.setAttribute('aria-pressed',on);t.textContent=on?'Delivery Board prototype · made-up data':'Delivery Board prototype · made-up data, best on a laptop';if(!on)b.focus()}
+b.addEventListener('click',function(){set(!f.classList.contains('is-full'))});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&f.classList.contains('is-full'))set(false)});
+})();
+</script>
+<script>
+(function(){var f=document.querySelector('.px-fig');if(!f)return;var fr=f.querySelector('iframe'),L=[].slice.call(f.querySelectorAll('.px-steps li'));
+function mark(i){L.forEach(function(l,k){l.classList.toggle('on',k===i);l.classList.toggle('dn',k<i);var b=l.querySelector('button');if(k===i)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')})}
+addEventListener('message',function(e){if(e.source!==fr.contentWindow)return;var d=e.data||{};if(d.type==='db-screen')mark(d.i)});
+L.forEach(function(l,k){l.querySelector('button').addEventListener('click',function(){fr.contentWindow.postMessage({type:'db-go',i:k},'*')})});
+mark(0)})();
+</script>
+</body>
+
+</html>

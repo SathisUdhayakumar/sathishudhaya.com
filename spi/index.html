@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPI Service app case study · Sathish Udhayakumar</title>
+<meta name="description" content="A mobile app where the customer, the service engineer and accounts all work on the same ticket, from the shop floor to a paid bill.">
+<link rel="canonical" href="https://sathishudhaya.com/spi/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sathishudhaya.com/spi/">
+<meta property="og:title" content="SPI Service app case study · Sathish Udhayakumar">
+<meta property="og:description" content="A mobile app where the customer, the service engineer and accounts all work on the same ticket, from the shop floor to a paid bill.">
+<meta property="og:image" content="https://sathishudhaya.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+/* Same system as Home (G) and Work (F)
+   Column 720 · spacing 8 16 24 32 48 72 120 · type 13 14 16 20 32 56
+   Text #0a0a0a / #5c5c5c · lines #e5e5e5 / #d4d4d4 · surfaces #f5f5f5 / #fafafa · blue #3e6dec for hover, focus, current */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:#fff;color:#0a0a0a;font:400 16px/1.6 'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,ol,figure,dl,dd,blockquote{margin:0;padding:0}
+ul,ol{list-style:none}
+a{color:#0a0a0a}
+a:hover{color:#3e6dec}
+a:focus-visible,button:focus-visible{outline:2px solid #3e6dec;outline-offset:2px;border-radius:2px}
+b,strong{font-weight:600}
+img{display:block;max-width:100%;height:auto}
+
+.col{max-width:768px;margin:0 auto;padding:0 24px}
+.wide{width:min(960px,100vw - 48px);position:relative;left:50%;transform:translateX(-50%)}
+
+/* menu */
+.nav{display:flex;justify-content:center;gap:24px;padding-top:24px;font-size:14px}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 2px;text-decoration:none;color:#5c5c5c}
+.nav a:hover{color:#3e6dec}
+.nav a[aria-current]{color:#0a0a0a;text-decoration:underline wavy #3e6dec 1px;text-underline-offset:6px}
+
+/* type */
+.label{font-size:14px;line-height:1.4;color:#5c5c5c}
+h1{font:600 clamp(40px,7vw,56px)/1.08 'Bricolage Grotesque',sans-serif;letter-spacing:-1.4px}
+h2{font:600 32px/1.2 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
+h3{font:600 20px/1.3 'Bricolage Grotesque',sans-serif;letter-spacing:-.2px}
+.lead{font-size:20px;line-height:1.5;color:#5c5c5c;max-width:640px}
+.body{max-width:640px}
+.body+.body{margin-top:16px}
+.note{font-size:13px;line-height:1.5;color:#5c5c5c}
+.muted{color:#5c5c5c}
+
+/* rhythm */
+header{padding-top:120px}
+header h1{margin-top:16px}
+header .lead{margin-top:32px}
+section{padding-top:120px}
+section>h2{margin-top:16px}
+section>h2+.body,section>h2+.lead{margin-top:16px}
+.blk{margin-top:72px}
+.blk>h3+.body{margin-top:16px}
+.blk>.label+h3{margin-top:8px}
+figure{margin-top:32px}
+figcaption{margin-top:16px;font-size:13px;line-height:1.5;color:#5c5c5c;max-width:640px}
+
+.wide>figcaption{margin-left:max(0px,(100% - 720px)/2)}
+
+/* results: number + what it measures */
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;margin-top:48px}
+.res>div{padding:24px 24px 24px 0}
+.res>div+div{padding-left:24px;border-left:1px solid #e5e5e5}
+.res .n{font:600 32px/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.6px}
+.res .l{margin-top:8px;font-size:14px;line-height:1.5;color:#5c5c5c}
+
+/* rows, like Experience on Home */
+.rows{border-bottom:1px solid #e5e5e5}
+.rows>div{display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px solid #e5e5e5;font-size:14px;line-height:1.5}
+.rows dt,.rows .k{color:#5c5c5c}
+.rows.tri>div{grid-template-columns:160px minmax(0,1fr) minmax(0,1fr)}
+.rows .hd{color:#5c5c5c;padding:8px 0}
+.facts{margin-top:48px}
+.facts+.note{margin-top:16px}
+
+/* screens */
+.shot{padding:0}
+.shot img{aspect-ratio:16/10;object-fit:cover;object-position:left top}
+.fitbox{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;border:1px solid #e5e5e5;border-radius:12px;background:#fafafa;box-shadow:0 8px 24px rgba(10,10,10,.06);padding:24px}
+.shot .fitbox img{aspect-ratio:auto;width:auto;height:100%;max-width:100%;border:0;box-shadow:none;background:none}
+.shot img{border-radius:12px;border:1px solid #e5e5e5;width:100%;background:#fff;box-shadow:0 8px 24px rgba(10,10,10,.06)}
+
+.shot.free img{aspect-ratio:auto;object-fit:initial}
+/* phone screens, straight on white */
+.phones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.phones.two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:648px;margin:0 auto}
+.phones.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.phones img{width:100%;aspect-ratio:390/844;object-fit:cover;object-position:top;border:1px solid #e5e5e5;border-radius:32px;box-shadow:0 8px 24px rgba(10,10,10,.06);background:#f3f4f6}
+.phones.four img{border-radius:24px}
+.phones p{margin-top:16px;font-size:13px;line-height:1.5;color:#5c5c5c}
+.phones p b{color:#0a0a0a;font-weight:500}
+/* phone prototype */
+.spx{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:48px;align-items:center;max-width:720px;margin:0 auto}
+.spx-st{display:flex;flex-direction:column;border-top:1px solid #e5e5e5}
+.spx-st li{border-bottom:1px solid #e5e5e5}
+.spx-st button{display:grid;grid-template-columns:96px minmax(0,1fr);column-gap:16px;width:100%;padding:12px 8px 12px 0;border:0;background:none;text-align:left;font:inherit;color:#0a0a0a;cursor:pointer;min-height:44px}
+.spx-st .r{grid-row:span 2;font-size:13px;line-height:1.5;color:#5c5c5c;padding-top:1px}
+.spx-st b{font-size:14px;font-weight:500;line-height:1.5}
+.spx-st small{font-size:13px;line-height:1.5;color:#5c5c5c}
+.spx-st button:hover b{color:#3e6dec}
+.spx-st li.on b{color:#3e6dec}
+.spx-st li.on .r{color:#0a0a0a}
+.spx-st li.on button{box-shadow:inset 2px 0 0 #3e6dec;padding-left:12px}
+.spx-st li.spx-rs-li{border-bottom:0;padding-top:16px}
+.spx-st .spx-rs{display:inline-flex;width:auto;min-height:44px;padding:0 16px;border:1px solid #e5e5e5;border-radius:999px;font-size:14px;font-weight:500;align-items:center}
+.spx-st .spx-rs:hover{color:#3e6dec;border-color:#3e6dec}
+.spx-ph{position:relative;aspect-ratio:390/844;border:1px solid #e5e5e5;border-radius:40px;overflow:hidden;box-shadow:0 8px 24px rgba(10,10,10,.06);background:#f3f4f6}
+.spx-ph iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media (max-width:760px){
+  .spx{grid-template-columns:minmax(0,1fr);gap:32px}
+  .spx-ph{max-width:340px;width:100%;margin:0 auto;order:-1}
+}
+@media (max-width:600px){
+  .phones,.phones.two,.phones.four{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;max-width:none;margin:0 -24px;padding:0 24px 8px;scroll-padding:0 24px}
+  .phones>div{flex:0 0 68%;scroll-snap-align:start}
+  .phones img,.phones.four img{border-radius:24px}
+}
+
+.next .s{margin-left:8px;font-size:16px;color:#5c5c5c}
+@media (max-width:600px){.next .s{display:block;margin:4px 0 0}}
+/* quote, like Kind words */
+blockquote{margin-top:32px;border-left:0;font-size:20px;line-height:1.5;max-width:640px}
+blockquote+p{margin-top:8px}
+
+/* prototype */
+.px{border:1px solid #e5e5e5;border-radius:24px;overflow:hidden;background:#f5f5f5}
+.px-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px 12px 24px;font-size:14px;color:#5c5c5c;border-bottom:1px solid #e5e5e5;background:#fafafa}
+.px-bar a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#0a0a0a;text-decoration:none}
+.px-bar a:hover{color:#3e6dec}
+.px-bar button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid #e5e5e5;border-radius:999px;background:#fff;color:#0a0a0a;font:500 14px/1 'DM Sans',sans-serif;cursor:pointer}
+.px-bar button:hover{color:#3e6dec;border-color:#3e6dec}
+.px-key{font-size:12px;color:#5c5c5c;border:1px solid #e5e5e5;border-radius:4px;padding:2px 6px}
+.px-fs-close{display:none;align-items:center;gap:8px}
+.px-fig.is-full{transform:none;left:0;width:auto}
+.px-fig.is-full .px{position:fixed;inset:0;z-index:100;border:0;border-radius:0;display:flex;flex-direction:column}
+.px-fig.is-full .px-stage{aspect-ratio:auto;flex:1}
+.px-fig.is-full .px-stage iframe{display:block}
+.px-fig.is-full .px-poster{display:none}
+.px-fig.is-full .px-fs-open{display:none}
+.px-fig.is-full .px-fs-close{display:inline-flex}
+html.px-lock{overflow:hidden}
+.px-stage{position:relative;aspect-ratio:1440/900;background:#fff}
+.px-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.px-poster{display:none}
+@media (max-width:760px){
+  .px-stage iframe{display:none}
+  .px-poster{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left top}
+}
+
+/* flag reasons */
+.flags{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:24px}
+.flags li{font-size:14px;line-height:1.5;color:#5c5c5c}
+.flags b{display:block;color:#0a0a0a;font-weight:500}
+
+/* next + footer */
+.next{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:24px 0;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;text-decoration:none;color:#0a0a0a}
+.next .t{font:600 20px/1.3 'Bricolage Grotesque',sans-serif}
+.next:hover .t,.next:hover .a{color:#3e6dec}
+.next .a{font-size:14px;color:#5c5c5c;white-space:nowrap}
+footer{margin-top:48px;padding-bottom:72px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:#5c5c5c}
+footer a{display:inline-flex;align-items:center;gap:4px;min-height:44px;color:#5c5c5c;text-decoration:none}
+footer a:hover{color:#3e6dec}
+
+@media (max-width:600px){
+  header{padding-top:72px}
+  section{padding-top:72px}
+  .blk{margin-top:48px}
+  h2{font-size:24px;letter-spacing:-.3px}
+  .res>div,.res>div+div{padding:16px 0;border-left:0}
+  .res>div+div{border-top:1px solid #e5e5e5}
+  .rows>div,.rows.tri>div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .rows .hd{display:none!important}
+  .shot img,.fitbox{border-radius:8px}
+  .fitbox{padding:8px}
+  .px{border-radius:16px}
+}
+</style>
+<script>(function(){try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}if(location.hash)return;var t=0,u=false;function top(){if(!u)scrollTo(0,0)}["wheel","touchstart","keydown","mousedown"].forEach(function(n){addEventListener(n,function(){u=true},{passive:true,once:true})});top();addEventListener("DOMContentLoaded",top);addEventListener("load",function(){top();setTimeout(top,150);setTimeout(top,600);setTimeout(top,1200)});addEventListener("pageshow",function(e){if(e.persisted){u=false;top()}})})();</script>
+</head>
+<body>
+<div class="col" id="top">
+
+<nav class="nav" aria-label="Main">
+<a href="/">Home</a>
+<a href="/work/" aria-current="page">Work</a>
+<a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)">Resume</a>
+</nav>
+
+<main>
+<header>
+<p class="label"><span style="color:#0a0a0a">SPI Equipments</span> · Service app · 2026</p>
+<h1>SPI Service: one ticket, from the shop floor to a paid bill</h1>
+<p class="lead">SPI Equipments makes and services machines for textile companies. I designed a mobile app where the customer, the service engineer and accounts all work on the same ticket.</p>
+
+<div class="res" role="list" aria-label="Expected change, before to expected">
+<div role="listitem"><p class="n">3–5 → 0</p><p class="l">calls or messages per ticket</p></div>
+<div role="listitem"><p class="n">3–5 → 0</p><p class="l">days to send a bill after the job</p></div>
+<div role="listitem"><p class="n">1 in 4 → 0</p><p class="l">visits found billable only afterwards</p></div>
+</div>
+<p class="note" style="margin-top:16px">Before is SPI’s estimate. Expected is what the design is built to do. The app is being built, so nothing is measured yet.</p>
+
+<dl class="rows facts">
+<div><dt>Role</dt><dd>Product Designer, end to end (the only designer)</dd></div>
+<div><dt>Worked with</dt><dd>SPI’s owner, their team and developers</dd></div>
+<div><dt>Platforms</dt><dd>iOS and Android, plus web</dd></div>
+<div><dt>Status</dt><dd>Being built now</dd></div>
+</dl>
+
+<figure class="wide">
+<div class="phones" role="list" aria-label="The same ticket on three phones">
+<div role="listitem"><img src="img/c-tk.webp" alt="Customer tracks ticket 1000018 with the engineer and visit time." loading="lazy"><p>Customer</p></div>
+<div role="listitem"><img src="img/e-visit.webp" alt="Engineer opens the same ticket at the visit." loading="lazy"><p>Engineer</p></div>
+<div role="listitem"><img src="img/a-bill.webp" alt="Accounts sends the bill for the same ticket." loading="lazy"><p>Accounts</p></div>
+</div>
+<figcaption><b>One ticket</b>, #1000018, seen by three roles.</figcaption>
+</figure>
+</header>
+
+<section aria-labelledby="s1">
+<p class="label">The problem</p>
+<h2 id="s1">Three teams, no shared record</h2>
+<p class="body">A complaint moved between the customer, the service team and accounts by phone and message. Each handoff lost something, so the same questions were asked again and again.</p>
+
+<div class="res" role="list" aria-label="What it cost before the app">
+<div role="listitem"><p class="n">20–30</p><p class="l">service tickets a month</p></div>
+<div role="listitem"><p class="n">1 in 4</p><p class="l">visits found billable only after the engineer left</p></div>
+<div role="listitem"><p class="n">~30 days</p><p class="l">for customers to pay</p></div>
+</div>
+<p class="note" style="margin-top:16px">SPI’s own estimates. That’s about 5–7 visits a month at risk of going unbilled.</p>
+
+<div class="blk">
+<h3>What got lost at each handoff</h3>
+<figure>
+<div class="rows tri" role="table" aria-label="Four handoffs and what each one lost">
+<div class="hd" role="row"><span role="columnheader">Handoff</span><span role="columnheader">How</span><span role="columnheader">What got lost</span></div>
+<div role="row"><span class="k" role="rowheader">Customer → service team</span><span role="cell" class="muted">By call</span><span role="cell">Which machine it was, and its serial number</span></div>
+<div role="row"><span class="k" role="rowheader">Service team → engineer</span><span role="cell" class="muted">By message</span><span role="cell">Whether the warranty still applied</span></div>
+<div role="row"><span class="k" role="rowheader">Engineer → accounts</span><span role="cell" class="muted">By message</span><span role="cell">Which spares were used</span></div>
+<div role="row"><span class="k" role="rowheader">Accounts → customer</span><span role="cell" class="muted">By email</span><span role="cell">Whether the bill had gone out</span></div>
+</div>
+</figure>
+</div>
+
+<div class="blk">
+<h3>How I learned this</h3>
+<p class="body">I spoke with all four groups who touch a ticket, then mapped one job from report to payment.</p>
+<figure>
+<div class="rows tri" role="table" aria-label="Who I learned from, what I heard, what it led to">
+<div class="hd" role="row"><span role="columnheader">Who</span><span role="columnheader">What I heard</span><span role="columnheader">What it led to</span></div>
+<div role="row"><span class="k" role="rowheader">Customers</span><span role="cell">They don’t know a machine’s model or serial, and chase the visit by phone.</span><span role="cell"><a href="#d1">Start from the machine</a></span></div>
+<div role="row"><span class="k" role="rowheader">Engineers</span><span role="cell">They plan by site, and write up faults and spares later, from memory.</span><span role="cell"><a href="#d2">Plan by day</a>, <a href="#d3">pick, don’t type</a></span></div>
+<div role="row"><span class="k" role="rowheader">Accounts</span><span role="cell">They rebuild each bill from calls and messages, and find out late if a job was billable.</span><span role="cell"><a href="#d4">Bill from the record</a></span></div>
+<div role="row"><span class="k" role="rowheader">SPI’s owner</span><span role="cell">Wanted to see open jobs, unpaid bills and which visits should be charged.</span><span role="cell">Management view, designed next</span></div>
+</div>
+</figure>
+<p class="body" style="margin-top:32px">I was the only designer. I mapped the workflow for each role, defined the ticket and its statuses, designed the web screens, then the mobile app and its design system, and worked with SPI’s developers through the build.</p>
+</div>
+</section>
+
+<section aria-labelledby="s2">
+<p class="label">Key decisions</p>
+<h2 id="s2">One record, each role sees its part</h2>
+<p class="body">Every decision cuts typing or a phone call out of the job.</p>
+
+<div class="blk">
+<h3>From my first version to now</h3>
+<p class="body">My first version gave every role the same dashboard. Now <b>each screen puts that role’s next step first</b>.</p>
+<figure class="wide">
+<div class="phones two">
+<div><img src="img/old-c-home.webp" alt="First version: a navy header with four icons and a ticket list." loading="lazy"><p><b>First version</b><br>Four equal icons, no clear first step. Bills hidden behind a tab.</p></div>
+<div><img src="img/c-home.webp" alt="Now: Scan a machine as the main action, the bill due on top, coloured status chips." loading="lazy"><p><b>Now</b><br>Scan a machine is the main action. The bill due shows first, in red when close.</p></div>
+</div>
+</figure>
+</div>
+
+<div class="blk" id="d1">
+<p class="label">Decision 1</p>
+<h3>Start from the machine, not a form</h3>
+<p class="body">Customers often don’t know a machine’s model or serial number. So they <b>scan the QR code on the machine</b>: make, model, serial and warranty come with it, and the report starts filled in. Nobody asks “which machine?” later.</p>
+<p class="body muted">Trade-off: SPI has to keep a register of every machine sold, with its QR code.</p>
+<figure class="wide">
+<div class="phones">
+<div><img src="img/c-scan.webp" alt="Scan screen with a QR frame over the machine’s code." loading="lazy"><p>1 · Point at the code on the machine</p></div>
+<div><img src="img/c-mach.webp" alt="Machine details with a warranty-expired banner and Report a fault." loading="lazy"><p>2 · Check the machine and its warranty</p></div>
+<div><img src="img/c-new.webp" alt="Report a fault with quick choices, a note and photos." loading="lazy"><p>3 · Pick what’s wrong and send</p></div>
+</div>
+<figcaption>The warranty shows before anyone books a visit.</figcaption>
+</figure>
+</div>
+
+<div class="blk" id="d2">
+<p class="label">Decision 2</p>
+<h3>Engineers plan by day, not by ticket list</h3>
+<p class="body">Engineers think in visits and sites, not ticket numbers. The first question at 9 am is “where do I go first?”, so home is <b>today’s visits in time order</b>, with new and rescheduled ones tagged. A month calendar is a tap away.</p>
+<p class="body muted">Trade-off: travel between sites is still planned outside the app.</p>
+<figure class="wide">
+<div class="phones">
+<div><img src="img/e-cal.webp" alt="Calendar month with dots for scheduled and rescheduled visits." loading="lazy"><p>1 · Pick a day</p></div>
+<div><img src="img/e-today.webp" alt="Today: three visits with times, sites and tags." loading="lazy"><p>2 · Open the next visit</p></div>
+<div><img src="img/e-visit.webp" alt="Visit details with a billable banner and Start the visit." loading="lazy"><p>3 · Start the visit</p></div>
+</div>
+<figcaption>A billable visit says so before the engineer starts.</figcaption>
+</figure>
+</div>
+
+<div class="blk" id="d3">
+<p class="label">Decision 3</p>
+<h3>Pick from lists, don’t type</h3>
+<p class="body">Engineers fill in reports standing at a machine, often with dirty hands. They <b>tick faults from a list and count spares with + and −</b>. A note is only for faults not on the list, and the counts become the bill.</p>
+<p class="body muted">Trade-off: the lists need upkeep as SPI adds machines and spares.</p>
+<figure class="wide">
+<div class="phones">
+<div><img src="img/e-diag.webp" alt="A list of faults with checkboxes." loading="lazy"><p>1 · Tick what’s wrong</p></div>
+<div><img src="img/e-spare.webp" alt="Spares with plus and minus counters." loading="lazy"><p>2 · Count the spares</p></div>
+<div><img src="img/e-review.webp" alt="Review of faults and spares before marking the job done." loading="lazy"><p>3 · Check and finish</p></div>
+</div>
+<figcaption>Nothing the engineer counts is typed again.</figcaption>
+</figure>
+</div>
+
+<div class="blk" id="d4">
+<p class="label">Decision 4</p>
+<h3>The bill starts from what the engineer recorded</h3>
+<p class="body">Accounts used to rebuild each bill from calls and messages. Now <b>a finished job arrives priced</b>. Accounts adds the invoice number and sends it, and the customer sees it with the days left to pay. The bill matches the work, and goes out the same day.</p>
+<p class="body muted">Trade-off: spare and service prices must be set up before the first bill.</p>
+<figure class="wide">
+<div class="phones">
+<div><img src="img/a-bill.webp" alt="Accounts: priced lines from the engineer, invoice number and Send." loading="lazy"><p>1 · Accounts adds the invoice number</p></div>
+<div><img src="img/c-bills.webp" alt="Customer bills with days left, red when 3 or fewer." loading="lazy"><p>2 · The customer sees the new bill</p></div>
+<div><img src="img/c-bill.webp" alt="Bill details with lines, total and how to pay." loading="lazy"><p>3 · And exactly what it’s for</p></div>
+</div>
+<figcaption>Red only when it’s close: due in 3 days or less.</figcaption>
+</figure>
+</div>
+
+<div class="blk" id="d5">
+<p class="label">Decision 5</p>
+<h3>Native on iOS and Android, from one system</h3>
+<p class="body">SPI’s customers and engineers use both iPhones and Android phones. <b>One set of colours, type and spacing</b>, while navigation, buttons and checkboxes follow each platform. People already know how their phone works.</p>
+<p class="body muted">Trade-off: two sets of components to build and test.</p>
+<figure class="wide">
+<div class="phones four">
+<div><img src="img/c-home.webp" alt="iOS customer home with a tab bar." loading="lazy"><p>iOS · tab bar</p></div>
+<div><img src="img/and-c-home.webp" alt="Android customer home with a navigation bar and a floating New ticket button." loading="lazy"><p>Android · floating “New ticket”</p></div>
+<div><img src="img/c-new.webp" alt="iOS report form as a sheet with Cancel." loading="lazy"><p>iOS · sheet with Cancel</p></div>
+<div><img src="img/and-c-new.webp" alt="Android report form as a full screen with a back arrow." loading="lazy"><p>Android · full screen, back arrow</p></div>
+</div>
+<figcaption>Same content and colours. Only the patterns change, to match each platform.</figcaption>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="s3">
+<p class="label">Try it</p>
+<h2 id="s3">Follow one ticket, end to end</h2>
+<p class="body">A working prototype. Pick a step, or tap anything you like. Sample data, built for iOS here.</p>
+<figure class="wide">
+<div class="spx">
+<ol class="spx-st" aria-label="Prototype steps">
+<li><button type="button" data-i="0"><span class="r">Customer</span><b>Report a fault</b><small>Scan the machine, pick what’s wrong, send it.</small></button></li>
+<li><button type="button" data-i="1"><span class="r">Customer</span><b>Track it</b><small>See the engineer and the visit time.</small></button></li>
+<li><button type="button" data-i="2"><span class="r">Engineer</span><b>Plan the day</b><small>Open today’s first visit.</small></button></li>
+<li><button type="button" data-i="3"><span class="r">Engineer</span><b>Fix and record</b><small>Tick what’s wrong, count the spares, finish.</small></button></li>
+<li><button type="button" data-i="4"><span class="r">Accounts</span><b>Send the bill</b><small>Add the invoice number and send it.</small></button></li>
+<li><button type="button" data-i="5"><span class="r">Customer</span><b>See the bill</b><small>The new bill shows with the days left to pay.</small></button></li>
+<li class="spx-rs-li"><button type="button" class="spx-rs">Restart</button></li>
+</ol>
+<div class="spx-ph"><iframe src="proto/app.html" title="SPI Service app prototype" loading="lazy"></iframe></div>
+</div>
+</figure>
+</section>
+
+<section aria-labelledby="s4">
+<p class="label">Design system</p>
+<h2 id="s4">A small system both platforms share</h2>
+<p class="body">Lato for type, SPI’s blue for the main action, and <b>one colour per status</b>. Every number uses tabular figures, so amounts and ticket numbers line up in lists.</p>
+<figure class="wide">
+<div class="shot free"><img src="img/ds-found.webp" alt="Colour, type and spacing: SPI blue, neutrals, four status colours, a Lato type scale mapped to iOS and Android, and a 4-point spacing grid with touch targets." loading="lazy"></div>
+</figure>
+<figure class="wide">
+<div class="shot free"><img src="img/ds-comp.webp" alt="Components for iOS and Android side by side: top bar, main action, switch view, list picking, quick choices, counter, status chips and bottom navigation." loading="lazy"></div>
+<figcaption>Each component shows its iOS and Android version, and when to use it.</figcaption>
+</figure>
+</section>
+
+<section aria-labelledby="s5">
+<p class="label">Value</p>
+<h2 id="s5">What it should change, and how we’ll know</h2>
+<p class="body">The app is being built now, so there are no results yet. These are the changes it’s designed for, and what we’ll measure.</p>
+<blockquote>“Before the app, we had to check calls and messages to track a job. Now, everyone can follow it in one place.”</blockquote>
+<p class="note">Rakesh, Owner, SPI Equipments, after a walkthrough of the prototype</p>
+
+<figure style="margin-top:48px">
+<div class="rows tri" role="table" aria-label="Before and with the app, for each team">
+<div class="hd" role="row"><span role="columnheader">Who</span><span role="columnheader">Before</span><span role="columnheader">With the app</span></div>
+<div role="row"><span class="k" role="rowheader">Customer</span><span role="cell" class="muted">Calls to report, calls to chase</span><span role="cell"><b>Scans, reports and tracks</b> in one place</span></div>
+<div role="row"><span class="k" role="rowheader">Engineer</span><span role="cell" class="muted">Writes up faults and spares after the visit</span><span role="cell"><b>Taps them in</b> at the machine</span></div>
+<div role="row"><span class="k" role="rowheader">Accounts</span><span role="cell" class="muted">Rebuilds each bill from messages</span><span role="cell">Gets the job <b>already priced</b></span></div>
+<div role="row"><span class="k" role="rowheader">Warranty</span><span role="cell" class="muted">Checked after the visit, if at all</span><span role="cell"><b>Known before anyone travels</b></span></div>
+</div>
+</figure>
+
+<div class="blk">
+<h3>How we’ll know it works</h3>
+<dl class="rows" style="margin-top:24px">
+<div><dt>Calls per ticket</dt><dd>Today 3–5. Tracking in the app should bring this near zero.</dd></div>
+<div><dt>Bills sent same day</dt><dd>Today 3–5 days. Priced jobs should leave accounts the day the job ends.</dd></div>
+<div><dt>Reports started by QR</dt><dd>Shows if customers trust the scan over calling.</dd></div>
+<div><dt>Days to payment</dt><dd>Today about 30. Clear bills with a due date should be paid faster.</dd></div>
+</dl>
+</div>
+
+<div class="blk">
+<p class="label">Designed, not built yet</p>
+<h3>Next: payments and a management view</h3>
+<figure class="wide">
+<div class="phones">
+<div><img src="img/c-pay.webp" alt="Customer pays a bill in the app with UPI, card or bank transfer." loading="lazy"><p>Pay in the app</p></div>
+<div><img src="img/m-dash.webp" alt="Management overview: tickets, days to fix, unpaid bills, billed visits and most-used spares." loading="lazy"><p>Management overview</p></div>
+<div><img src="img/m-reg.webp" alt="Machine register with serial numbers and warranty status, grouped by customer." loading="lazy"><p>Machine register</p></div>
+</div>
+</figure>
+</div>
+</section>
+
+<section aria-labelledby="s6">
+<p class="label">Looking back</p>
+<h2 id="s6">What I’d test next</h2>
+<p class="body">The biggest open question is diagnosis at the machine, on a phone. Here’s how I’d answer it before rollout.</p>
+<dl class="rows" style="margin-top:32px">
+<div><dt>Who</dt><dd>5 SPI engineers, on real visits, at the machine, using their own phones.</dd></div>
+<div><dt>Tasks</dt><dd>Open today’s first visit and start it, record what’s wrong, count the spares and finish.</dd></div>
+<div><dt>It works if</dt><dd><b>All 5 finish without help</b>, spare counts match what was used, and customers trust the warranty status.</dd></div>
+<div><dt>Left for later</dt><dd>Online payment, management reporting and the chart view on the dashboards.</dd></div>
+<div><dt>Where it is now</dt><dd>Being built for iOS and Android. Customer, engineer and accounts flows are designed end to end.</dd></div>
+</dl>
+</section>
+
+<section aria-label="Next" style="padding-top:120px">
+<a class="next" href="/autolog/"><span><span class="label" style="display:block">Next case study</span><span class="t">AutoLog</span><span class="s">Krane · AI tool</span></span><span class="a" aria-hidden="true">→</span></a>
+</section>
+</main>
+
+<footer>
+<span>© 2026 Sathish Udhayakumar</span>
+<a href="#top">Back to top <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></a>
+</footer>
+</div>
+<script>
+(function(){var r=document.querySelector('.spx');if(!r)return;var f=r.querySelector('iframe'),L=[].slice.call(r.querySelectorAll('.spx-st li')).filter(function(l){return !l.classList.contains('spx-rs-li')});
+function mark(i){L.forEach(function(l,k){l.classList.toggle('on',k===i);var b=l.querySelector('button');if(k===i)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')})}
+addEventListener('message',function(e){if(e.source!==f.contentWindow)return;var d=e.data||{};if(d.type==='spi-screen')mark(d.i)});
+L.forEach(function(l,k){l.querySelector('button').addEventListener('click',function(){f.contentWindow.postMessage({type:'spi-go',i:k},'*')})});
+r.querySelector('.spx-rs').addEventListener('click',function(){f.contentWindow.postMessage({type:'spi-reset'},'*')});
+mark(0)})();
+</script>
+</body>
+</html>
