@@ -64,85 +64,37 @@ a{color:#0a0a0a}a:hover{color:#3e6dec}
 
 <section id="work" aria-labelledby="sw-h" style="padding-top: 72px; scroll-margin-top: 24px">
 <h2 id="sw-h" style="margin: 0 0 16px; font-size: 14px; font-weight: 400; color: #5c5c5c">Selected work</h2>
-<div id="wk-track" class="wk-track" role="region" aria-label="Selected work, scrolls sideways" tabindex="0" style="display: flex; gap: 24px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; margin-left: calc(50% - 50cqw); margin-right: calc(50% - 50cqw); padding: 0 calc((100cqw - min(1008px, 100cqw)) / 2 + 40px) 4px calc((100cqw - min(1008px, 100cqw)) / 2 + 24px); scroll-padding-left: calc((100cqw - min(1008px, 100cqw)) / 2 + 24px); scroll-padding-right: calc((100cqw - min(1008px, 100cqw)) / 2 + 24px)">
-<article style="flex: 0 0 400px; max-width: calc(100cqw - 48px); scroll-snap-align: start; display: flex; flex-direction: column">
-<div class="wb-tile" style="position: relative; background: #f5f5f5; border-radius: 24px; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 32px 24px; box-sizing: border-box">
-<div style="width: 100%; max-width: 360px; background: #ffffff; border: 1px solid #e5e5e5; border-radius: 6px; font-family: 'Geist', sans-serif; font-size: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(10,10,10,0.06)">
-<div style="display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #e5e5e5"><span style="font-weight: 600">AutoLog</span><span style="font-size: 11px; color: #5c5c5c">1 to check</span></div>
-<div style="display: flex; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid #e5e5e5"><span>Rebar #5</span><span style="display: flex; gap: 8px; align-items: center"><span style="font-family: 'Geist Mono', monospace">1,240 ft</span><span style="width: 6px; height: 6px; border-radius: 50%; background: #16a34a"></span></span></div>
-<div style="display: flex; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid #e5e5e5"><span>Concrete 4000 psi</span><span style="display: flex; gap: 8px; align-items: center"><span style="font-family: 'Geist Mono', monospace">86 yd³</span><span style="width: 6px; height: 6px; border-radius: 50%; background: #16a34a"></span></span></div>
-<div class="wb-t" style="display:flex;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #e5e5e5;background:#fafafa;box-shadow:inset 2px 0 0 #d4a72c;"><span style="font-weight: 500">Anchor bolt 3/4"</span><span style="display: flex; gap: 8px; align-items: center"><span style="font-family: 'Geist Mono', monospace">64 ea</span><span class="wb-t" style="width:6px;height:6px;border-radius:50%;display:inline-block;background:#d4a72c"></span></span></div>
-<div style="padding: 10px 12px; font-size: 11px; color: #5c5c5c; line-height: 1.6">Source p.<span style="font-family: 'Geist Mono', monospace">19</span>: …fixed with <span style="background: #fef3c7; color: #0a0a0a">3/4" anchor bolts, 64 ea</span>…</div>
-<div style="padding: 0 12px 12px"><button type="button" class="wb-t" style="border-radius:4px;padding:6px 12px;font-size:12px;font-weight:500;font-family:Geist,sans-serif;background:#0a0a0a;color:#ffffff;border:1px solid #0a0a0a;" data-dc-click="h1">Approve row</button></div>
+<style>
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pgrid article{position:relative;aspect-ratio:16/11;border-radius:24px;overflow:hidden;padding:32px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .2s ease}
+.pgrid article.wide{grid-column:1/-1;aspect-ratio:auto;min-height:240px}
+.pgrid article:hover{transform:translateY(-2px)}
+.pgrid .k{margin:0;font-size:13px;line-height:1.4;color:#5c5c5c}
+.pgrid h3{margin:0;font:600 28px/1.15 'Bricolage Grotesque',sans-serif;letter-spacing:-.5px}
+.pgrid h3 a{color:#0a0a0a;text-decoration:none}
+.pgrid h3 a::after{content:"";position:absolute;inset:0;border-radius:24px}
+.pgrid h3 a:focus-visible{outline:none}
+.pgrid h3 a:focus-visible::after{outline:2px solid #3e6dec;outline-offset:2px}
+.pgrid .r{margin:16px 0 0;font:600 22px/1.3 'Bricolage Grotesque',sans-serif;letter-spacing:-.2px;color:#0a0a0a}
+.pgrid .r em{font-style:normal;opacity:.45}
+.pgrid .s{margin:4px 0 0;font-size:14px;line-height:1.5;color:#5c5c5c}
+.pgrid .go{position:absolute;right:28px;top:28px;width:36px;height:36px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.75);font-size:16px;color:#0a0a0a;transition:transform .2s ease}
+.pgrid article:hover .go{transform:translateX(2px)}
+.pgrid article:hover h3 a{color:#3e6dec}
+.pgrid .g1{background:radial-gradient(100% 100% at 100% 0%,#fde9c4 0%,rgba(253,233,196,0) 65%),radial-gradient(80% 80% at 0% 100%,#fff4e0 0%,rgba(255,244,224,0) 70%),#fbf8f3}
+.pgrid .g2{background:radial-gradient(100% 100% at 100% 0%,#d6e2fd 0%,rgba(214,226,253,0) 65%),radial-gradient(80% 80% at 0% 100%,#ebf0fe 0%,rgba(235,240,254,0) 70%),#f6f8fd}
+.pgrid .g3{background:radial-gradient(100% 100% at 100% 0%,#fff0a8 0%,rgba(255,240,168,0) 65%),radial-gradient(80% 80% at 0% 100%,#fff8d6 0%,rgba(255,248,214,0) 70%),#fdfcf4}
+.pgrid .g4{background:radial-gradient(100% 100% at 100% 0%,#cdeee0 0%,rgba(205,238,224,0) 65%),radial-gradient(80% 80% at 0% 100%,#e8f7f0 0%,rgba(232,247,240,0) 70%),#f5fbf8}
+.pgrid .g5{background:radial-gradient(70% 140% at 100% 0%,#e6dcfb 0%,rgba(230,220,251,0) 65%),radial-gradient(60% 120% at 0% 100%,#f3eefd 0%,rgba(243,238,253,0) 70%),#faf8fe}
+@media (max-width:700px){.pgrid{grid-template-columns:1fr;gap:16px}.pgrid article{aspect-ratio:auto;min-height:240px;padding:24px}.pgrid .go{right:20px;top:20px}.pgrid h3{font-size:24px}.pgrid .r{font-size:20px}}
+@media (prefers-reduced-motion:reduce){.pgrid article,.pgrid .go{transition:none}.pgrid article:hover{transform:none}}
+</style><div id="wk-track" class="pgrid" role="list" aria-label="Selected work">
+<article class="g1" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Krane · AI tool · Web</p><div><h3><a href="/autolog/">AutoLog</a></h3><p class="r">2 weeks <em>→</em> half a day</p><p class="s">to turn a 500-page spec into a procurement log</p></div></article>
+<article class="g2" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Krane · Dashboard · Web and mobile</p><div><h3><a href="/delivery-board/">Delivery Board</a></h3><p class="r">9 in 10 visits</p><p class="s">moved to the new board within weeks</p></div></article>
+<article class="g3" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Krane · Design system · Web</p><div><h3><a href="/design-system/">Design System</a></h3><p class="r">Every new screen</p><p class="s">is still built on it after handoff</p></div></article>
+<article class="g4" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">SPI · Service app · Web and mobile</p><div><h3><a href="/spi/">SPI Service app</a></h3><p class="r">1 app <em>·</em> 3 teams</p><p class="s">customer, engineer and accounts on one ticket</p></div></article>
+<article class="g5 wide" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Powerplay · Field app · Web and mobile</p><div><h3><a href="/powerplay/">Powerplay</a></h3><p class="r">Built from scratch <em>·</em> 15+ features</p><p class="s">for site teams who were new to apps</p></div></article>
 </div>
-</div>
-
-
-<p style="margin: 16px 0 0; padding: 0; font-size: 14px; line-height: 1.5; color: #5c5c5c"><a href="/autolog/" style="font-size: 16px; font-weight: 500; color: #0a0a0a; text-decoration: none; margin-right: 8px">AutoLog</a><b style="color: #0a0a0a; font-weight: 600">2 weeks</b> of work → <b style="color: #0a0a0a; font-weight: 600">half a day</b></p>
-</article>
-<article style="flex: 0 0 400px; max-width: calc(100cqw - 48px); scroll-snap-align: start; display: flex; flex-direction: column">
-<div class="wb-tile" style="position: relative; background: #f5f5f5; border-radius: 24px; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 32px 24px; box-sizing: border-box">
-<div style="width: 100%; max-width: 360px; background: #ffffff; border: 1px solid #e5e5e5; border-radius: 6px; font-family: 'Geist', sans-serif; font-size: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(10,10,10,0.06)">
-<div style="display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #e5e5e5"><span style="font-weight: 600">Deliveries · Today</span><span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #5c5c5c">4</span></div>
-
-<button type="button" class="wb-t" aria-pressed="false" style="display:grid;grid-template-columns:48px minmax(0,1fr) 56px;gap:8px;width:100%;text-align:left;border:0;border-bottom:1px solid #e5e5e5;padding:9px 12px;font-size:12px;font-family:Geist,sans-serif;background:#ffffff;box-shadow:none;color:#5c5c5c;font-weight:400;" data-dc-click="h2"><span style="font-family: 'Geist Mono', monospace">07:30</span><span>Ready-mix, 8 yd³</span><span>Gate A</span></button>
-
-<button type="button" class="wb-t" aria-pressed="true" style="display:grid;grid-template-columns:48px minmax(0,1fr) 56px;gap:8px;width:100%;text-align:left;border:0;border-bottom:1px solid #e5e5e5;padding:9px 12px;font-size:12px;font-family:Geist,sans-serif;background:#fafafa;box-shadow:inset 2px 0 0 #0a0a0a;color:#0a0a0a;font-weight:500;" data-dc-click="h3"><span style="font-family: 'Geist Mono', monospace">09:00</span><span>Steel beams, 12 pcs</span><span>Gate B</span></button>
-
-<button type="button" class="wb-t" aria-pressed="false" style="display:grid;grid-template-columns:48px minmax(0,1fr) 56px;gap:8px;width:100%;text-align:left;border:0;border-bottom:1px solid #e5e5e5;padding:9px 12px;font-size:12px;font-family:Geist,sans-serif;background:#ffffff;box-shadow:none;color:#5c5c5c;font-weight:400;" data-dc-click="h4"><span style="font-family: 'Geist Mono', monospace">11:15</span><span>Drywall, 40 sheets</span><span>Gate A</span></button>
-
-<button type="button" class="wb-t" aria-pressed="false" style="display:grid;grid-template-columns:48px minmax(0,1fr) 56px;gap:8px;width:100%;text-align:left;border:0;border-bottom:1px solid #e5e5e5;padding:9px 12px;font-size:12px;font-family:Geist,sans-serif;background:#ffffff;box-shadow:none;color:#5c5c5c;font-weight:400;" data-dc-click="h5"><span style="font-family: 'Geist Mono', monospace">14:00</span><span>Windows, 18 units</span><span>Gate C</span></button>
-
-<div style="padding: 12px; display: flex; justify-content: space-between; background: #fafafa; font-size: 11px; color: #5c5c5c"><span>Steel beams, 12 pcs · Gate B</span><span style="font-family: 'Geist Mono', monospace">ETA 08:55</span></div>
-</div>
-</div>
-
-
-<p style="margin: 16px 0 0; padding: 0; font-size: 14px; line-height: 1.5; color: #5c5c5c"><a href="/delivery-board/" style="font-size: 16px; font-weight: 500; color: #0a0a0a; text-decoration: none; margin-right: 8px">Delivery Board</a><b style="color: #0a0a0a; font-weight: 600">9 in 10</b> visits use the new board</p>
-</article>
-<article style="flex: 0 0 400px; max-width: calc(100cqw - 48px); scroll-snap-align: start; display: flex; flex-direction: column">
-<div class="wb-tile" style="position: relative; background: #f5f5f5; border-radius: 24px; overflow: hidden; display: block; overflow: hidden">
-<img src="/img/ds-cover.webp" alt="Krane Design System components: buttons, inputs, status pills, sidebar items" style="position: absolute; top: 24px; left: 24px; right: 24px; width: calc(100% - 48px); height: calc(100% - 48px); object-fit: contain; object-position: center">
-</div>
-
-<p style="margin: 16px 0 0; padding: 0; font-size: 14px; line-height: 1.5; color: #5c5c5c"><a href="/design-system/" style="font-size: 16px; font-weight: 500; color: #0a0a0a; text-decoration: none; margin-right: 8px">Design System</a>Used on <b style="color: #0a0a0a; font-weight: 600">every</b> new screen</p>
-</article>
-<article style="flex: 0 0 400px; max-width: calc(100cqw - 48px); scroll-snap-align: start; display: flex; flex-direction: column">
-<div class="wb-tile" style="position: relative; background: #f5f5f5; border-radius: 24px; overflow: hidden; display: block; overflow: hidden">
-<img src="/img/spi-cover.webp" alt="SPI Service app on three phones: customer, engineer and accounts views of one ticket" style="position: absolute; top: 24px; left: 24px; right: 24px; width: calc(100% - 48px); height: calc(100% - 48px); object-fit: contain; object-position: center">
-</div>
-
-<p style="margin: 16px 0 0; padding: 0; font-size: 14px; line-height: 1.5; color: #5c5c5c"><a href="/spi/" style="font-size: 16px; font-weight: 500; color: #0a0a0a; text-decoration: none; margin-right: 8px">SPI Service app</a><b style="color: #0a0a0a; font-weight: 600">One app</b> for 3 teams</p>
-</article>
-<article style="flex: 0 0 400px; max-width: calc(100cqw - 48px); scroll-snap-align: start; display: flex; flex-direction: column">
-<div class="wb-tile" style="position: relative; background: #f5f5f5; border-radius: 24px; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 32px 24px; box-sizing: border-box">
-<div style="width: 200px; height: 304px; box-sizing: border-box; background: #ffffff; border: 1px solid #d4d4d4; border-radius: 28px; padding: 24px 14px; font-family: 'Geist', sans-serif; font-size: 12px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 8px 24px rgba(10,10,10,0.06)">
-<div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 600">Daily report</span><span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #5c5c5c">23 Nov</span></div>
-<div style="border: 1px solid #e5e5e5; border-radius: 6px; padding: 10px; display: flex; justify-content: space-between"><span style="color: #5c5c5c">Workers</span><span style="font-family: 'Geist Mono', monospace; font-weight: 500">24</span></div>
-<div style="border: 1px solid #e5e5e5; border-radius: 6px; padding: 6px; display: flex; flex-direction: column">
-<span style="font-size: 11px; color: #5c5c5c; padding: 4px">Work done</span>
-
-<button type="button" aria-pressed="true" style="display: flex; gap: 8px; align-items: center; text-align: left; background: transparent; border: 0; padding: 6px 4px; font-size: 12px; color: #0a0a0a; font-family: 'Geist', sans-serif" data-dc-click="h6"><span class="wb-t" style="width:12px;height:12px;flex:none;border-radius:3px;box-sizing:border-box;background:#0a0a0a;border:1px solid #0a0a0a;"></span>Slab pour, level 3</button>
-
-<button type="button" aria-pressed="false" style="display: flex; gap: 8px; align-items: center; text-align: left; background: transparent; border: 0; padding: 6px 4px; font-size: 12px; color: #0a0a0a; font-family: 'Geist', sans-serif" data-dc-click="h7"><span class="wb-t" style="width:12px;height:12px;flex:none;border-radius:3px;box-sizing:border-box;background:#ffffff;border:1px solid #d4d4d4;"></span>Blockwork, east wall</button>
-
-<button type="button" aria-pressed="false" style="display: flex; gap: 8px; align-items: center; text-align: left; background: transparent; border: 0; padding: 6px 4px; font-size: 12px; color: #0a0a0a; font-family: 'Geist', sans-serif" data-dc-click="h8"><span class="wb-t" style="width:12px;height:12px;flex:none;border-radius:3px;box-sizing:border-box;background:#ffffff;border:1px solid #d4d4d4;"></span>Site cleanup</button>
-
-</div>
-<button type="button" class="wb-t" style="margin-top:auto;border-radius:6px;padding:10px;font-size:12px;font-weight:500;font-family:Geist,sans-serif;background:#0a0a0a;color:#ffffff;border:1px solid #0a0a0a;" data-dc-click="h9">Submit report</button>
-</div>
-</div>
-
-
-<p style="margin: 16px 0 0; padding: 0; font-size: 14px; line-height: 1.5; color: #5c5c5c"><a href="/powerplay/" style="font-size: 16px; font-weight: 500; color: #0a0a0a; text-decoration: none; margin-right: 8px">Powerplay</a>Built from <b style="color: #0a0a0a; font-weight: 600">scratch</b>, 15+ features</p>
-</article>
-</div>
-<div style="display: flex; align-items: center; gap: 8px; margin-top: 24px">
-<button type="button" class="wb-arrow" aria-label="Previous project" disabled="" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: -6px; padding: 6px; box-sizing: border-box; border-radius: 16px; border: 6px solid transparent; background: #f5f5f5; background-clip: padding-box; color: #d4d4d4" data-dc-click="h10"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></button>
-<button type="button" class="wb-arrow" aria-label="Next project" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: -6px; padding: 6px; box-sizing: border-box; border-radius: 16px; border: 6px solid transparent; background: #f5f5f5; background-clip: padding-box; color: #0a0a0a" data-dc-click="h11"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
-<p style="margin: 0 0 0 16px; font-size: 13px; color: #5c5c5c">Work under NDA is shown with rebuilt screens and sample data.</p>
-</div>
-
 </section>
 
 <section aria-labelledby="ex-h" style="padding-top: 72px">
@@ -172,10 +124,10 @@ a{color:#0a0a0a}a:hover{color:#3e6dec}
 <h2 id="tk-h" style="margin: 0 0 16px; font-size: 14px; font-weight: 400; color: #5c5c5c">Let’s talk</h2>
 <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 12px">
 <a id="tk-mail" href="mailto:sathisjun1@gmail.com?subject=Hello%20from%20your%20portfolio" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: 32px; line-height: 1.2; letter-spacing: -0.6px; color: #0a0a0a; text-decoration: none; overflow-wrap: anywhere">sathisjun1@gmail.com</a>
-<button type="button" aria-label="Copy email address" style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 1px 12px 0; border-radius: 999px; border: 1px solid #e5e5e5; background: #ffffff; color: #0a0a0a; font-size: 13px; font-weight: 500" data-dc-click="h12"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>Copy</button>
+<button type="button" aria-label="Copy email address" style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 1px 12px 0; border-radius: 999px; border: 1px solid #e5e5e5; background: #ffffff; color: #0a0a0a; font-size: 13px; font-weight: 500" data-dc-click="h1"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>Copy</button>
 <span role="status" aria-live="polite" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)"></span>
 </div>
-<p style="margin: 8px 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font-size: 14px; line-height: 1.5; color: #5c5c5c"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #16a34a; flex: none"></span>I usually reply within 24 hours · It’s <span style="color: #0a0a0a; font-variant-numeric: tabular-nums">9:28 pm</span> in Coimbatore</p>
+<p style="margin: 8px 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font-size: 14px; line-height: 1.5; color: #5c5c5c"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #16a34a; flex: none"></span>I usually reply within 24 hours · It’s <span style="color: #0a0a0a; font-variant-numeric: tabular-nums">9:33 pm</span> in Coimbatore</p>
 <nav aria-label="Elsewhere" style="margin-top: 32px; display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 14px">
 <a href="https://www.linkedin.com/in/sathisudhaya/" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)" style="display: inline-flex; align-items: center; min-height: 44px; color: #0a0a0a; text-decoration: none">LinkedIn ↗</a>
 <a href="/Sathish-Udhayakumar-Resume.pdf" target="_blank" rel="noopener" aria-label="Resume, PDF (opens in new tab)" style="display: inline-flex; align-items: center; min-height: 44px; color: #0a0a0a; text-decoration: none">Resume ↗</a>
@@ -209,75 +161,37 @@ a{color:#0a0a0a}a:hover{color:#3e6dec}
 
 <section id="work" aria-labelledby="sw-h" style="padding-top: 72px; scroll-margin-top: 24px">
 <h2 id="sw-h" style="margin: 0 0 16px; font-size: 14px; font-weight: 400; color: #5c5c5c">Selected work</h2>
-<div id="wk-track" class="wk-track" role="region" aria-label="Selected work, scrolls sideways" tabindex="0" style="display: flex; gap: 24px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; margin-left: calc(50% - 50cqw); margin-right: calc(50% - 50cqw); padding: 0 calc((100cqw - min(1008px, 100cqw)) / 2 + 40px) 4px calc((100cqw - min(1008px, 100cqw)) / 2 + 24px); scroll-padding-left: calc((100cqw - min(1008px, 100cqw)) / 2 + 24px); scroll-padding-right: calc((100cqw - min(1008px, 100cqw)) / 2 + 24px)">
-<article style="flex: 0 0 400px; max-width: calc(100cqw - 48px); scroll-snap-align: start; display: flex; flex-direction: column">
-<div class="wb-tile" style="position: relative; background: #f5f5f5; border-radius: 24px; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 32px 24px; box-sizing: border-box">
-<div style="width: 100%; max-width: 360px; background: #ffffff; border: 1px solid #e5e5e5; border-radius: 6px; font-family: 'Geist', sans-serif; font-size: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(10,10,10,0.06)">
-<div style="display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #e5e5e5"><span style="font-weight: 600">AutoLog</span><span style="font-size: 11px; color: #5c5c5c">{{al.counter}}</span></div>
-<div style="display: flex; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid #e5e5e5"><span>Rebar #5</span><span style="display: flex; gap: 8px; align-items: center"><span style="font-family: 'Geist Mono', monospace">1,240 ft</span><span style="width: 6px; height: 6px; border-radius: 50%; background: #16a34a"></span></span></div>
-<div style="display: flex; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid #e5e5e5"><span>Concrete 4000 psi</span><span style="display: flex; gap: 8px; align-items: center"><span style="font-family: 'Geist Mono', monospace">86 yd³</span><span style="width: 6px; height: 6px; border-radius: 50%; background: #16a34a"></span></span></div>
-<div class="wb-t" style="{{al.rowSt}}"><span style="font-weight: 500">Anchor bolt 3/4"</span><span style="display: flex; gap: 8px; align-items: center"><span style="font-family: 'Geist Mono', monospace">64 ea</span><span class="wb-t" style="{{al.dotSt}}"></span></span></div>
-<div style="padding: 10px 12px; font-size: 11px; color: #5c5c5c; line-height: 1.6">Source p.<span style="font-family: 'Geist Mono', monospace">19</span>: …fixed with <span style="background: #fef3c7; color: #0a0a0a">3/4" anchor bolts, 64 ea</span>…</div>
-<div style="padding: 0 12px 12px"><button type="button" class="wb-t" onClick="{{al.toggle}}" style="{{al.btnSt}}">{{al.btn}}</button></div>
+<style>
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pgrid article{position:relative;aspect-ratio:16/11;border-radius:24px;overflow:hidden;padding:32px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .2s ease}
+.pgrid article.wide{grid-column:1/-1;aspect-ratio:auto;min-height:240px}
+.pgrid article:hover{transform:translateY(-2px)}
+.pgrid .k{margin:0;font-size:13px;line-height:1.4;color:#5c5c5c}
+.pgrid h3{margin:0;font:600 28px/1.15 'Bricolage Grotesque',sans-serif;letter-spacing:-.5px}
+.pgrid h3 a{color:#0a0a0a;text-decoration:none}
+.pgrid h3 a::after{content:"";position:absolute;inset:0;border-radius:24px}
+.pgrid h3 a:focus-visible{outline:none}
+.pgrid h3 a:focus-visible::after{outline:2px solid #3e6dec;outline-offset:2px}
+.pgrid .r{margin:16px 0 0;font:600 22px/1.3 'Bricolage Grotesque',sans-serif;letter-spacing:-.2px;color:#0a0a0a}
+.pgrid .r em{font-style:normal;opacity:.45}
+.pgrid .s{margin:4px 0 0;font-size:14px;line-height:1.5;color:#5c5c5c}
+.pgrid .go{position:absolute;right:28px;top:28px;width:36px;height:36px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.75);font-size:16px;color:#0a0a0a;transition:transform .2s ease}
+.pgrid article:hover .go{transform:translateX(2px)}
+.pgrid article:hover h3 a{color:#3e6dec}
+.pgrid .g1{background:radial-gradient(100% 100% at 100% 0%,#fde9c4 0%,rgba(253,233,196,0) 65%),radial-gradient(80% 80% at 0% 100%,#fff4e0 0%,rgba(255,244,224,0) 70%),#fbf8f3}
+.pgrid .g2{background:radial-gradient(100% 100% at 100% 0%,#d6e2fd 0%,rgba(214,226,253,0) 65%),radial-gradient(80% 80% at 0% 100%,#ebf0fe 0%,rgba(235,240,254,0) 70%),#f6f8fd}
+.pgrid .g3{background:radial-gradient(100% 100% at 100% 0%,#fff0a8 0%,rgba(255,240,168,0) 65%),radial-gradient(80% 80% at 0% 100%,#fff8d6 0%,rgba(255,248,214,0) 70%),#fdfcf4}
+.pgrid .g4{background:radial-gradient(100% 100% at 100% 0%,#cdeee0 0%,rgba(205,238,224,0) 65%),radial-gradient(80% 80% at 0% 100%,#e8f7f0 0%,rgba(232,247,240,0) 70%),#f5fbf8}
+.pgrid .g5{background:radial-gradient(70% 140% at 100% 0%,#e6dcfb 0%,rgba(230,220,251,0) 65%),radial-gradient(60% 120% at 0% 100%,#f3eefd 0%,rgba(243,238,253,0) 70%),#faf8fe}
+@media (max-width:700px){.pgrid{grid-template-columns:1fr;gap:16px}.pgrid article{aspect-ratio:auto;min-height:240px;padding:24px}.pgrid .go{right:20px;top:20px}.pgrid h3{font-size:24px}.pgrid .r{font-size:20px}}
+@media (prefers-reduced-motion:reduce){.pgrid article,.pgrid .go{transition:none}.pgrid article:hover{transform:none}}
+</style><div id="wk-track" class="pgrid" role="list" aria-label="Selected work">
+<article class="g1" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Krane · AI tool · Web</p><div><h3><a href="/autolog/">AutoLog</a></h3><p class="r">2 weeks <em>→</em> half a day</p><p class="s">to turn a 500-page spec into a procurement log</p></div></article>
+<article class="g2" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Krane · Dashboard · Web and mobile</p><div><h3><a href="/delivery-board/">Delivery Board</a></h3><p class="r">9 in 10 visits</p><p class="s">moved to the new board within weeks</p></div></article>
+<article class="g3" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Krane · Design system · Web</p><div><h3><a href="/design-system/">Design System</a></h3><p class="r">Every new screen</p><p class="s">is still built on it after handoff</p></div></article>
+<article class="g4" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">SPI · Service app · Web and mobile</p><div><h3><a href="/spi/">SPI Service app</a></h3><p class="r">1 app <em>·</em> 3 teams</p><p class="s">customer, engineer and accounts on one ticket</p></div></article>
+<article class="g5 wide" role="listitem"><span class="go" aria-hidden="true">→</span><p class="k">Powerplay · Field app · Web and mobile</p><div><h3><a href="/powerplay/">Powerplay</a></h3><p class="r">Built from scratch <em>·</em> 15+ features</p><p class="s">for site teams who were new to apps</p></div></article>
 </div>
-</div>
-
-
-<p style="margin: 16px 0 0; padding: 0; font-size: 14px; line-height: 1.5; color: #5c5c5c"><a href="/autolog/" style="font-size: 16px; font-weight: 500; color: #0a0a0a; text-decoration: none; margin-right: 8px">AutoLog</a><b style="color: #0a0a0a; font-weight: 600">2 weeks</b> of work → <b style="color: #0a0a0a; font-weight: 600">half a day</b></p>
-</article>
-<article style="flex: 0 0 400px; max-width: calc(100cqw - 48px); scroll-snap-align: start; display: flex; flex-direction: column">
-<div class="wb-tile" style="position: relative; background: #f5f5f5; border-radius: 24px; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 32px 24px; box-sizing: border-box">
-<div style="width: 100%; max-width: 360px; background: #ffffff; border: 1px solid #e5e5e5; border-radius: 6px; font-family: 'Geist', sans-serif; font-size: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(10,10,10,0.06)">
-<div style="display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #e5e5e5"><span style="font-weight: 600">Deliveries · Today</span><span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #5c5c5c">4</span></div>
-<sc-for list="{{db.rows}}" as="r" hint-placeholder-count="4">
-<button type="button" class="wb-t" onClick="{{r.pick}}" aria-pressed="{{r.pressed}}" style="{{r.st}}"><span style="font-family: 'Geist Mono', monospace">{{r.time}}</span><span>{{r.what}}</span><span>{{r.gate}}</span></button>
-</sc-for>
-<div style="padding: 12px; display: flex; justify-content: space-between; background: #fafafa; font-size: 11px; color: #5c5c5c"><span>{{db.detail}}</span><span style="font-family: 'Geist Mono', monospace">{{db.eta}}</span></div>
-</div>
-</div>
-
-
-<p style="margin: 16px 0 0; padding: 0; font-size: 14px; line-height: 1.5; color: #5c5c5c"><a href="/delivery-board/" style="font-size: 16px; font-weight: 500; color: #0a0a0a; text-decoration: none; margin-right: 8px">Delivery Board</a><b style="color: #0a0a0a; font-weight: 600">9 in 10</b> visits use the new board</p>
-</article>
-<article style="flex: 0 0 400px; max-width: calc(100cqw - 48px); scroll-snap-align: start; display: flex; flex-direction: column">
-<div class="wb-tile" style="position: relative; background: #f5f5f5; border-radius: 24px; overflow: hidden; display: block; overflow: hidden">
-<img src="/img/ds-cover.webp" alt="Krane Design System components: buttons, inputs, status pills, sidebar items" style="position: absolute; top: 24px; left: 24px; right: 24px; width: calc(100% - 48px); height: calc(100% - 48px); object-fit: contain; object-position: center">
-</div>
-
-<p style="margin: 16px 0 0; padding: 0; font-size: 14px; line-height: 1.5; color: #5c5c5c"><a href="/design-system/" style="font-size: 16px; font-weight: 500; color: #0a0a0a; text-decoration: none; margin-right: 8px">Design System</a>Used on <b style="color: #0a0a0a; font-weight: 600">every</b> new screen</p>
-</article>
-<article style="flex: 0 0 400px; max-width: calc(100cqw - 48px); scroll-snap-align: start; display: flex; flex-direction: column">
-<div class="wb-tile" style="position: relative; background: #f5f5f5; border-radius: 24px; overflow: hidden; display: block; overflow: hidden">
-<img src="/img/spi-cover.webp" alt="SPI Service app on three phones: customer, engineer and accounts views of one ticket" style="position: absolute; top: 24px; left: 24px; right: 24px; width: calc(100% - 48px); height: calc(100% - 48px); object-fit: contain; object-position: center">
-</div>
-
-<p style="margin: 16px 0 0; padding: 0; font-size: 14px; line-height: 1.5; color: #5c5c5c"><a href="/spi/" style="font-size: 16px; font-weight: 500; color: #0a0a0a; text-decoration: none; margin-right: 8px">SPI Service app</a><b style="color: #0a0a0a; font-weight: 600">One app</b> for 3 teams</p>
-</article>
-<article style="flex: 0 0 400px; max-width: calc(100cqw - 48px); scroll-snap-align: start; display: flex; flex-direction: column">
-<div class="wb-tile" style="position: relative; background: #f5f5f5; border-radius: 24px; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 32px 24px; box-sizing: border-box">
-<div style="width: 200px; height: 304px; box-sizing: border-box; background: #ffffff; border: 1px solid #d4d4d4; border-radius: 28px; padding: 24px 14px; font-family: 'Geist', sans-serif; font-size: 12px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 8px 24px rgba(10,10,10,0.06)">
-<div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-weight: 600">Daily report</span><span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #5c5c5c">23 Nov</span></div>
-<div style="border: 1px solid #e5e5e5; border-radius: 6px; padding: 10px; display: flex; justify-content: space-between"><span style="color: #5c5c5c">Workers</span><span style="font-family: 'Geist Mono', monospace; font-weight: 500">24</span></div>
-<div style="border: 1px solid #e5e5e5; border-radius: 6px; padding: 6px; display: flex; flex-direction: column">
-<span style="font-size: 11px; color: #5c5c5c; padding: 4px">Work done</span>
-<sc-for list="{{pp.tasks}}" as="t" hint-placeholder-count="3">
-<button type="button" onClick="{{t.toggle}}" aria-pressed="{{t.pressed}}" style="display: flex; gap: 8px; align-items: center; text-align: left; background: transparent; border: 0; padding: 6px 4px; font-size: 12px; color: #0a0a0a; font-family: 'Geist', sans-serif"><span class="wb-t" style="{{t.boxSt}}"></span>{{t.label}}</button>
-</sc-for>
-</div>
-<button type="button" class="wb-t" onClick="{{pp.send}}" style="{{pp.btnSt}}">{{pp.btn}}</button>
-</div>
-</div>
-
-
-<p style="margin: 16px 0 0; padding: 0; font-size: 14px; line-height: 1.5; color: #5c5c5c"><a href="/powerplay/" style="font-size: 16px; font-weight: 500; color: #0a0a0a; text-decoration: none; margin-right: 8px">Powerplay</a>Built from <b style="color: #0a0a0a; font-weight: 600">scratch</b>, 15+ features</p>
-</article>
-</div>
-<div style="display: flex; align-items: center; gap: 8px; margin-top: 24px">
-<button type="button" class="wb-arrow" aria-label="Previous project" onClick="{{prev}}" disabled="{{atStart}}" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: -6px; padding: 6px; box-sizing: border-box; border-radius: 16px; border: 6px solid transparent; background: #f5f5f5; background-clip: padding-box; color: {{prevColor}}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></button>
-<button type="button" class="wb-arrow" aria-label="Next project" onClick="{{next}}" disabled="{{atEnd}}" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: -6px; padding: 6px; box-sizing: border-box; border-radius: 16px; border: 6px solid transparent; background: #f5f5f5; background-clip: padding-box; color: {{nextColor}}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
-<p style="margin: 0 0 0 16px; font-size: 13px; color: #5c5c5c">Work under NDA is shown with rebuilt screens and sample data.</p>
-</div>
-
 </section>
 
 <section aria-labelledby="ex-h" style="padding-top: 72px">
