@@ -79,7 +79,7 @@
       Array.prototype.slice.call(frag.childNodes).forEach(function (c) { proc(c, vals).forEach(function (x) { box.appendChild(x); }); });
       morphdom(root, box, {
         onBeforeElUpdated: function (from, to) {
-          if (from.id === 'mk-slot') return false;
+          if (from.id === 'mk-slot' || (from.hasAttribute && from.hasAttribute('data-keep'))) return false;
           if (from === document.activeElement && (from.tagName === 'INPUT' || from.tagName === 'TEXTAREA')) { to.value = from.value; }
           return true;
         }
